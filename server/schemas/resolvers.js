@@ -1,20 +1,24 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Category } = require('../models');
 
 const resolvers = 
 {
   Query: 
   {
-    user: async (parent, args, context) =>
+    users: async () =>
     {
-      if (context.user)
-      {
-        const user = await User.findById(context.user._id);
-
-        return user;
-      }
-
-      throw new AuthenticationError('Not logged in');
+        return await User.find();
+    },  
+    user: async (parent, { _id }) =>
+    {
+        return await User.findById(_id);
+    }, 
+    categories: async () =>
+    {
+        return await Category.find();
+    },
+    subcategories: async (parent, { _id }) =>
+    {
+        return await Category.findById(_id);
     },
   },
   Mutation: 
