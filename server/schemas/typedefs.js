@@ -10,10 +10,19 @@ const typeDefs = gql`
     email: String
   }
 
+  type Category 
+  {
+    _id: ID
+    name: String
+    subcategories: [Category]
+  }
+
   type Query 
   {
     user(_id: ID!): User
     users: [User]
+    categories: [Category]
+    subcategories(_id: ID): [Category]
   }
 
   type Mutation 

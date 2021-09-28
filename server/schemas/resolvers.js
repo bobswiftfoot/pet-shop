@@ -1,17 +1,24 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Category } = require('../models');
 
 const resolvers = 
 {
   Query: 
   {
-    user: async (parent, { _id }) =>
-    {
-        return await User.findById(_id);
-    },
     users: async () =>
     {
         return await User.find();
+    },  
+    user: async (parent, { _id }) =>
+    {
+        return await User.findById(_id);
+    }, 
+    categories: async () =>
+    {
+        return await Category.find();
+    },
+    subcategories: async (parent, { _id }) =>
+    {
+        return await Category.findById(_id);
     },
   },
   Mutation: 
