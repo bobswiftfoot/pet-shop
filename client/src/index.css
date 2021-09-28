@@ -75,6 +75,10 @@ a {
   font-weight: bold;
 }
 
+.list {
+  list-style-type: none;
+}
+
 a:hover {
   text-decoration: underline;
 }
@@ -124,18 +128,31 @@ button[disabled] {
 .feat-card {
   width: 50%;
   justify-content: center;
+  margin: auto;
 }
 
 .feat-card-text{
-  color:rgb(253, 175, 29)
+  color:rgb(255, 198, 9);
 }
 
-.feat-card-group {
-  margin-top: 200px;
+
+.carousel {
+  height: 500px;
+  width: 700px;
+  margin: auto;
+  background-color: rgba(1, 61, 139, 0.5);
+  border-radius: 5px;
 }
-.feat-product-cards {
-  color:rgba(30, 129, 0, 0.5);
-  background-color: rgb(216, 253, 248);
+
+.carousel-item {
+  color: black;
+}
+
+.carousel-img {
+  margin-top: 10px;
+  height: 300px;
+  width: 400px;
+  opacity: 1;
 }
 
 .transparent {

@@ -23,13 +23,13 @@ function Nav() {
       );
     } else {
       return (
-        <ul className="flex-row">
+        <ul className="flex-row list">
           <li className="mx-1">
             <Link to="/signup">
               Signup
             </Link>
           </li>
-          <li className="mx-1">
+          <li className="mx-1 list">
             <Link to="/login">
               Login
             </Link>
