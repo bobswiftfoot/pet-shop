@@ -5,16 +5,13 @@ const resolvers =
 {
   Query: 
   {
-    user: async (parent, args, context) =>
+    user: async (parent, { _id }) =>
     {
-      if (context.user)
-      {
-        const user = await User.findById(context.user._id);
-
-        return user;
-      }
-
-      throw new AuthenticationError('Not logged in');
+        return await User.findById(_id);
+    },
+    users: async () =>
+    {
+        return await User.find();
     },
   },
   Mutation: 
