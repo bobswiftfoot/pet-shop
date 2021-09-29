@@ -10,7 +10,6 @@ const Home = () => {
       {/* <CategoryMenu /> */}
       <HomeCard />
       {/* <ProductList /> */}
-      <Cart />
     </div>
   );
 };
