@@ -16,7 +16,7 @@ IMAGE OF APP
 
 GIVEN an e-commerce website deployed through Heroku
 I can sign up, login, or as a guest
-Browse pet accessories to fulfill all of my pet's needs
+browse through pet accessories to fulfill all of my pet's needs
 I can login and purchase items, write reviews on items, and access my purchase through my user profile
 
 ## Built With
