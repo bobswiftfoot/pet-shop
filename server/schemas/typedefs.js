@@ -8,6 +8,7 @@ const typeDefs = gql`
     lastName: String
     userName: String
     email: String
+    reviews: [Review]
   }
 
   type Category 
@@ -26,6 +27,16 @@ const typeDefs = gql`
       category: Category
       rating: Float
       featuredProduct: Boolean
+      reviews: [Review]
+  }
+
+  type Review
+  {
+      _id: ID
+      reviewText: String
+      rating: Float
+      user: User
+      product: Product
   }
 
   type Query 
@@ -37,6 +48,8 @@ const typeDefs = gql`
     products(category: ID): [Product]
     product(_id: ID!): Product
     featuredProducts(category: ID!): [Product]
+    reviews(user: ID, product: ID): [Review]
+    review(_id: ID!): Review
   }
 
   type Mutation 
@@ -48,6 +61,9 @@ const typeDefs = gql`
     addProduct(name: String!, description: String, price: Float!, category: ID!, featuredProduct: Boolean): Product
     editProduct(_id: ID!, name: String, description: String, price: Float, category: ID, featuredProduct: Boolean, rating: Float): Product
     removeProduct(_id: ID!): Product
+    addReview(reviewText: String!, rating: Float!, user: ID!, product: ID!): Review
+    editReview(_id: ID!, reviewText: String, rating: Float): Review
+    removeReview(_id: ID!): Review
   }
 `;
 

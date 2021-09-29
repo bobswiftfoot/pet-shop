@@ -35,7 +35,12 @@ const productSchema = new Schema(
         ref: 'Category',
         required: true
     },
-    //reviews: [Review],
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Review',
+        }
+    ],
     rating: 
     {
         type: Number,

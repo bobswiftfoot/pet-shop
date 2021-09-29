@@ -35,7 +35,12 @@ const userSchema = new Schema(
         minlength: 5
     },
     //orders: [Order],
-    //reviews: [Review],
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Review',
+        }
+    ],
     admin: 
     {
         type: Boolean,
