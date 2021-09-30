@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_ALL_USERS = gql`
-    users 
+    query users 
     {
         _id
         firstName
@@ -47,7 +47,7 @@ export const QUERY_USER = gql`
 
 
 export const QUERY_ALL_CATEGORIES = gql`
-    categories
+    query categories
     {
         _id
         name
@@ -71,7 +71,7 @@ export const QUERY_SUBCATEGORIES = gql`
 `;
 
 export const QUERY_ALL_PRODUCTS = gql`
-    products 
+    query products 
     {
         _id
         name
@@ -151,7 +151,7 @@ export const QUERY_PRODUCT = gql`
 export const QUERY_FEATURED_PRODUCTS = gql`
     query featuredProducts($featuredProductsCategory: ID!) 
     {
-        featuredProducts(category: $featuredProductsCategory
+        featuredProducts(category: $featuredProductsCategory)
         {
             _id
             name
@@ -213,4 +213,12 @@ export const QUERY_REVIEW = gql`
             }
         }
     }
+`;
+
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($products: [ID]!) {
+    checkout(products: $products) {
+      session
+    }
+  }
 `;

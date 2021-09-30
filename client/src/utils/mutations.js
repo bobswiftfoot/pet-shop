@@ -162,7 +162,7 @@ export const EDIT_REVIEW = gql`
   }
 `;
 
-export const EDIT_REVIEW = gql`
+export const REMOVE_REVIEW = gql`
   mutation removeReview($removeReviewId: ID!) 
   {
     removeReview(_id: $removeReviewId) 
@@ -179,6 +179,35 @@ export const EDIT_REVIEW = gql`
       {
         _id
         name
+      }
+    }
+  }
+`;
+
+export const ADD_ORDER = gql`
+  mutation addOrder($products: [ID]!) {
+    addOrder(products: $products) {
+      purchaseDate
+      products {
+        _id
+        name
+        description
+        price
+        quantity
+        category {
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
       }
     }
   }
