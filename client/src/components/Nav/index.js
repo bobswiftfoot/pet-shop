@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import pawprints from '../../assets/images/pawprints.jpg';
 import lizard from '../../assets/images/lizard.jpg';
+
 function Nav() {
 
   function showNavigation() {
@@ -30,15 +31,13 @@ function Nav() {
         <>
           <div className='nav-items'>
             <Dropdown className="d-inline mx-2">
-              <Dropdown.Toggle className = 'dropdown' id="dropdown-autoclose-true">
-                Products
-            </Dropdown.Toggle>
-
+            <Button className="d-inline  products-btn mx-2" href='/products' variant="light">Products</Button>
               <Dropdown.Menu>
                 <Dropdown.Item href="#">Menu Item</Dropdown.Item>
                 <Dropdown.Item href="#">Menu Item</Dropdown.Item>
                 <Dropdown.Item href="#">Menu Item</Dropdown.Item>
               </Dropdown.Menu>
+
             </Dropdown>
               <Dropdown className="d-inline mx-2" >
                 <Dropdown.Toggle className = 'dropdown' id="dropdown-autoclose-true">
@@ -74,7 +73,7 @@ function Nav() {
     <div className='nav-container'>
     <header className="masthead container nav-text">
       <div className='row inner-nav justify-content-between'>
-        <h1 className='col-6'>
+        <h1 className='col-5'>
           <Link to="/">
             <span role="img" aria-label="shopping bag"></span>
            The Pet Outlet

@@ -3,10 +3,12 @@ import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel';
+import Button from 'react-bootstrap/Button';
 import kennel from '../../assets/images/kennel.jpg';
 import dogandcat from '../../assets/images/dogandcat.jpg';
 import fishtank from '../../assets/images/fishtank.jpg';
 import birdcage from '../../assets/images/birdcage.jpg';
+
 function HomeCard() {
   return (
     <Carousel className="carousel">
@@ -19,6 +21,7 @@ function HomeCard() {
         <Carousel.Caption className="carousel-caption" >
           <h3>Multi-purpose Kennel</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <Button className="d-inline  addtocart-btn mx-2" href='/products' variant="light">Products</Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={4000}>
