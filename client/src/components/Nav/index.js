@@ -71,7 +71,7 @@ function Nav() {
 
   return (
     <div className='nav-container'>
-    <header className="masthead container nav-text">
+    <header className="masthead .inner-nav-container nav-text">
       <div className='row inner-nav justify-content-between'>
         <h1 className='col-5'>
           <Link to="/">
@@ -81,7 +81,6 @@ function Nav() {
         <Image src={pawprints} className='nav-pawprints'/>
         <Image src={lizard} className='nav-lizard'/>
         </h1>
-
         <nav className='col-6 right-col'>
           {showNavigation()}
         </nav>
