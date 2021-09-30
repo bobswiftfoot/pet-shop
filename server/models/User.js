@@ -4,9 +4,6 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
 {
-<<<<<<< HEAD
-
-=======
     firstName: 
     {
         type: String,
@@ -49,7 +46,6 @@ const userSchema = new Schema(
         type: Boolean,
         default: false
     }
->>>>>>> 6d43a92140da87e06fe716f6d1fa5d5deb4f17a6
 });
 
 userSchema.pre('save', async function (next)
