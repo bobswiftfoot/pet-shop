@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Category, Product, Review } = require('../models');
+const { User, Category, Product, Review, Order } = require('../models');
 const stripe = require('stripe')('sk_test_51JeslkDra0kXhwYb8LB1x0i2Q6W9AF0xAeVXBqLqZouUzw3WUkwPfG94ISNW5BZnXOEtM3dYYvLh9AAytaTExThX00bV1s0ZFL');
 
 const resolvers =
@@ -43,6 +43,18 @@ const resolvers =
         },
         review: async (parent, { _id }) => {
             return await Review.findById(_id).populate("user").populate("product");
+        },
+        order: async (parent, { _id }, context) => {
+            if (context.user) {
+                const user = await User.findById(context.user._id).populate({
+                    path: 'orders.products',
+                    populate: 'category'
+                });
+
+                return user.orders.id(_id);
+            }
+
+            throw new AuthenticationError('Not logged in');
         },
         checkout: async (parent, args, context) => {
 
@@ -93,6 +105,18 @@ const resolvers =
         addCategory: async (parent, args) => {
             const category = await Category.create(args);
             return category;
+        },
+        addOrder: async (parent, { products }, context) => {
+            console.log(context);
+            if (context.user) {
+                const order = new Order({ products });
+
+                await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+                return order;
+            }
+
+            throw new AuthenticationError('Not logged in');
         },
         editCategory: async (parent, args) => {
             const category = await Category.findOneAndUpdate(args._id, args);
