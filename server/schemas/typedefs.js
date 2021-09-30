@@ -54,7 +54,6 @@ const typeDefs = gql`
     featuredProducts(category: ID!): [Product]
     reviews(user: ID, product: ID): [Review]
     review(_id: ID!): Review
-    checkout(products: [ID]!): Checkout
   }
 
   type Mutation 
