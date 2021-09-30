@@ -39,6 +39,12 @@ const typeDefs = gql`
       product: Product
   }
 
+  type Order {
+    _id: ID
+    purchaseDate: String
+    products: [Product]
+  }
+
   type Checkout {
     session: ID
   }
@@ -51,6 +57,7 @@ const typeDefs = gql`
     subcategories(_id: ID!): [Category]
     products(category: ID): [Product]
     product(_id: ID!): Product
+    order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
     featuredProducts(category: ID!): [Product]
     reviews(user: ID, product: ID): [Review]
@@ -61,6 +68,7 @@ const typeDefs = gql`
   {
     addUser(firstName: String!, lastName: String!, userName: String!, email: String!, password: String!): User
     addCategory(name: String!, subcategories: [ID]): Category
+    addOrder(products: [ID]!): Order
     editCategory(_id: ID!, name: String, subcategories: [ID]): Category
     removeCategory(_id: ID!): Category
     addProduct(name: String!, description: String, price: Float!, category: ID!, featuredProduct: Boolean): Product
