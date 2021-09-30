@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useReducer } from "react";
 import {
   UPDATE_PRODUCTS,
@@ -88,3 +89,44 @@ export const reducer = (state, action) => {
 export function useProductReducer(initialState) {
   return useReducer(reducer, initialState)
 }
+=======
+import { useReducer } from 'react';
+
+import {
+    UPDATE_PRODUCTS,
+    UPDATE_CATEGORIES,
+    UPDATE_CURRENT_CATEGORY
+} from './actions';
+
+export const reducer = (state, action) => {
+    switch (action.type) {
+        // for `UPDATE_PRODUCTS`
+        case UPDATE_PRODUCTS:
+            return {
+                ...state,
+                products: [...action.products],
+            };
+
+        // for `UPDATE_CATEGORIES`
+        case UPDATE_CATEGORIES:
+            return {
+                ...state,
+                categories: [...action.categories]
+            };
+
+        // for `UPDATE_CURRENT_CATEGORY`
+        case UPDATE_CURRENT_CATEGORY:
+            return {
+                ...state,
+                currentCategory: action.currentCategory
+            };
+
+        default:
+            return state;
+    }
+};
+
+export function useProductReducer(initialState) {
+    return useReducer(reducer, initialState);
+};
+>>>>>>> 6d43a92140da87e06fe716f6d1fa5d5deb4f17a6
