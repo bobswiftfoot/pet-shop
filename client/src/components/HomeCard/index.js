@@ -11,11 +11,6 @@ function HomeCard() {
   return (
     <Carousel className="carousel">
       <Carousel.Item className="carousel-item" interval={1000000}>
-      <img
-          className="cat-img "
-          src={dogandcat}
-          alt="First slide"
-        />
         <img
           className="carousel-img "
           src={kennel}

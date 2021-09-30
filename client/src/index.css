@@ -94,7 +94,7 @@ header {
 
 header a {
   color: black;
-  margin-left: 100px;
+  margin-left: 120px;
   margin-top: 40px;
   font-size: larger;
 }
@@ -130,13 +130,14 @@ header a {
 .nav-pawprints {
   width: 100px;
   height: 100px;
+  margin-left: -20px;
 }
 
 .nav-lizard {
   width: 100px;
   height: 100px;
-  margin-top: -250px;
-  margin-left: -50px;
+  margin-top: -50px;
+  margin-left: -20px;
 }
 
 .right-col {

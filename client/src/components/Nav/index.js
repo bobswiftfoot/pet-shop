@@ -42,7 +42,7 @@ function Nav() {
             </Dropdown>
               <Dropdown className="d-inline mx-2" >
                 <Dropdown.Toggle className = 'dropdown' id="dropdown-autoclose-true">
-                  Clickable Outside
+                  Other
             </Dropdown.Toggle>
 
                 <Dropdown.Menu>
@@ -74,7 +74,7 @@ function Nav() {
     <div className='nav-container'>
     <header className="masthead container nav-text">
       <div className='row inner-nav justify-content-between'>
-        <h1 className='col-4'>
+        <h1 className='col-6'>
           <Link to="/">
             <span role="img" aria-label="shopping bag"></span>
            The Pet Outlet
