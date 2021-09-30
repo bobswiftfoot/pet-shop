@@ -106,6 +106,18 @@ const resolvers =
             const category = await Category.create(args);
             return category;
         },
+        addOrder: async (parent, { products }, context) => {
+            console.log(context);
+            if (context.user) {
+                const order = new Order({ products });
+
+                await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+                return order;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
         editCategory: async (parent, args) => {
             const category = await Category.findOneAndUpdate(args._id, args);
             return category;
