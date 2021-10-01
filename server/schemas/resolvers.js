@@ -1,11 +1,21 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Category, Product, Review, Order } = require('../models');
+const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_51JeslkDra0kXhwYb8LB1x0i2Q6W9AF0xAeVXBqLqZouUzw3WUkwPfG94ISNW5BZnXOEtM3dYYvLh9AAytaTExThX00bV1s0ZFL');
 
 const resolvers =
 {
     Query:
     {
+        me: async (parent, args, context) => {
+            if (context.user) {
+                const userData = await User.findOne({ _id: context.user._id })
+                    .select('-__v -password')
+                return userData;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
         users: async () => {
             return await User.find().populate({ path: "reviews", populate: "product" });
         },
@@ -101,6 +111,22 @@ const resolvers =
         addUser: async (parent, args) => {
             const user = await User.create(args);
             return user;
+        },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const token = signToken(user);
+            return { token, user };
         },
         addCategory: async (parent, args) => {
             const category = await Category.create(args);

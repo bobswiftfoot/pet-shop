@@ -12,14 +12,22 @@ function Signup(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log("pre-reg");
+
     const mutationResponse = await addUser({
       variables: {
-        email: formState.email,
-        password: formState.password,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
+        addUserEmail: formState.email,
+        addUserPassword: formState.password,
+        addUserFirstName: formState.firstName,
+        addUserLastName: formState.lastName,
+        addUserUserName: formState.userName
       },
     });
+
+    console.log("post-reg");
+
+    console.log(mutationResponse.data.addUser.user);
+    console.log(mutationResponse.data.addUser.token);
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
   };
@@ -49,6 +57,15 @@ function Signup(props) {
             name="lastName"
             type="lastName"
             id="lastName"
+            onChange={handleChange} />
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="formBasicPassword">
+    <Form.Label>Username</Form.Label>
+    <Form.Control placeholder="Last"
+            name="userName"
+            type="userName"
+            id="userName"
             onChange={handleChange} />
   </Form.Group>
 
