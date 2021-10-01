@@ -26,7 +26,7 @@ function HomeCard() {
         <Carousel.Caption className="carousel-caption" >
           <h3>Multi-purpose Kennel</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          <Button className="d-inline  addtocart-btn mx-2" href='/products' variant="light">Add To Cart</Button>
+          <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={4000}>

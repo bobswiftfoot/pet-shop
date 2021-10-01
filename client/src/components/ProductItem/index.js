@@ -52,10 +52,9 @@ function ProductItem(item) {
       <Card className='product-page-cards'>
         <Card.Img className='product-page-img'variant="top" src={dogfood} />
         <Card.Body>
-          <Card.Title>Card title</Card.Title>
+          <Card.Title className='product-card-h2'>Card title</Card.Title>
           <Card.Text>
             This is a longer card with supporting text below as a natural
-
           </Card.Text>
         </Card.Body>
       </Card>

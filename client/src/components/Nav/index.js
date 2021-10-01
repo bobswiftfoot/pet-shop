@@ -31,7 +31,7 @@ function Nav() {
         <>
           <div className='nav-items'>
             <Dropdown className="d-inline mx-2">
-            <Button className="d-inline  products-btn mx-2" href='/products' variant="light">Products</Button>
+            <Button className="d-inline  products-btn mx-2" href='/products' variant="light">All Products</Button>
               <Dropdown.Menu>
                 <Dropdown.Item href="#">Menu Item</Dropdown.Item>
                 <Dropdown.Item href="#">Menu Item</Dropdown.Item>
@@ -71,7 +71,7 @@ function Nav() {
 
   return (
     <div className='nav-container'>
-    <header className="masthead .inner-nav-container nav-text">
+    <header className="masthead inner-nav-container nav-text">
       <div className='row inner-nav justify-content-between'>
         <h1 className='col-5'>
           <Link to="/">
