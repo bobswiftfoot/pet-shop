@@ -65,7 +65,7 @@ h6 {
 }
 
 p {
-  font-size: 2.0rem;
+  font-size: 1.0rem;
   margin-top: 0;
 }
 
@@ -94,13 +94,19 @@ header {
 
 header a {
   color: black;
-  margin-left: 120px;
   margin-top: 40px;
   font-size: larger;
+  z-index: 3;
+  position:relative;
+}
+
+header a:hover {
+  color:black;
+  text-decoration: none;
 }
 
 .container {
-  width: 100%;
+  width: 70%;
   max-width: 1700px;
   margin-left: auto;
   margin-right: auto;
@@ -111,16 +117,23 @@ header a {
   position: relative;
   text-align: center;
   color: white;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(246 251 255);
 }
 
 .nav-container {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 182, 86);
   height: 150px;
+  z-index: 4;
+  position:relative;
+
+}
+
+.inner-nav-container{
+  width: 100%;
 }
 
 .inner-nav {
-  height: 100px;
+  height: 80px;
 }
 
 .nav-text  {
@@ -131,13 +144,17 @@ header a {
   width: 100px;
   height: 100px;
   margin-left: -20px;
+  background-color: rgb(255, 1, 1);
 }
 
 .nav-lizard {
   width: 100px;
   height: 100px;
-  margin-top: -50px;
-  margin-left: -20px;
+  margin-top: -56px;
+  margin-left: -350px;
+  background-color: rgb(255, 186, 96);
+  z-index: 2;
+  position:relative;
 }
 
 .right-col {
@@ -145,7 +162,7 @@ header a {
 }
 
 .nav-items {
-  margin-top: 106px;
+  margin-top: 100px;
 }
 
 .dropdown {
@@ -155,8 +172,72 @@ header a {
 }
 
 .dropdown:hover {
-  background: rgba(0,0,0,0.0);
-  border:0px  none;
+  color: #000;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.dropdown-menu.show {
+  background-color: rgb(248 187 97);
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: .25rem 1rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+.dropdown-item:hover {
+  display: block;
+  width: 100%;
+  padding: .25rem 1rem;
+  clear: both;
+  font-weight: 400;
+  color: #030303;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  transform: scale(1.04);
+  border: 0;
+}
+
+.products-btn {
+  background-color: transparent; 
+  color: white;
+  border: none;
+}
+
+.btn-light:hover {
+  color: #000;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.show>.btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.btn-primary:focus {
+  color: #fff;
+  background-color: #636363;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 0.25rem rgb(49 132 253 / 50%);
+}
+
+.show>.btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.25rem rgb(255 255 255 / 50%);
 }
 
 .cart {
@@ -186,41 +267,51 @@ button[disabled] {
 
 .card {
   width: 100%;
-  height: 200px;
   text-align: center;
-  color:rgba(39, 158, 2, 0.5);
+  color:rgba(0, 0, 0, 0.5);
   justify-content: center;
-}
-
-.main-card-head {
-  font-size: 1.25rem;
-  color:rgb(4, 5, 8);
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-}
-
-.feat-card {
-  width: 50%;
-  justify-content: center;
+  font-size: 20px;
   margin: auto;
-}
-
-.feat-card-text{
-  color:#ffc609;
-  text-shadow: -1px 0 black, 0 .5px black, .5px 0 black, 0 -1px black;
 }
 
 
 .carousel {
-  height: 580px;
+  height: 750px;
   width: 100%;
   margin: auto;
-  background-color: rgba(210, 228, 252, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
   opacity: 1;
 }
 
+.carousel-control-next,
+.carousel-control-prev {
+  position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 7%;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    background: 0 0;
+    border: 0;
+    opacity: .5;
+    transition: opacity .15s ease;
+}
+
+.carousel-control-next:hover, .carousel-control-prev:focus, .carousel-control-prev:hover {
+  background-color: rgb(194, 194, 194);
+  text-decoration: none;
+  outline: 0;
+  opacity: .3;
+}
+
 .carousel-img {
-  margin-top: 30px;
+  margin-top: 50px;
   height: 500px;
   width: 600px;
   opacity: 1;
@@ -233,7 +324,11 @@ button[disabled] {
 
 .carousel-caption{
   color: black;
-  margin-bottom: -50px;
+  margin-bottom: -30px;
+}
+
+.carousel-item {
+  height: 650px;
 }
 
 .carousel-caption h3{
@@ -244,16 +339,45 @@ button[disabled] {
 .carousel-caption p{
   color: rgb(0, 0, 0);
   font-size: 1rem;
+
+}
+
+.addtocart-btn {
+  color: black;
+  background-color: rgb(255, 193, 100);
+
 }
 
 .transparent {
   border: .1px solid transparent;
 }
 
+.home-product-col {
+  width: 50%;
+}
+
+.home-product-cards {
+  width: 50%;
+  height: 220px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  font-size: 20px;
+  margin: auto;
+
+}
+
 img {
   width: 100%;
   opacity: .7;
   border-radius: 1000px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.about-img {
+  width: 100%;
+  /* border-radius: 1000px; */
   margin: auto;
   margin-top: 30px;
 }
@@ -289,6 +413,40 @@ form {
   justify-content: center;
 }
 
+/* .col {
+  width: 50%;
+} */
+
+.product-page-col {
+  width: 25%;
+}
+
+.prod-g-4, .prod-gx-4 {
+  --bs-gutter-x: 1.5rem;
+}
+.prod-g-4, .prod-gy-4 {
+  --bs-gutter-y: 9.5rem;
+  margin-top: -101px;
+}
+
+.product-page-img {
+  width: 100%;
+  border-radius: 1000px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+/* .card {
+  width: 75%;
+  height: 280px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  font-size: 20px;
+  margin-left: 100px;
+  margin-bottom: 50px;
+} */
+
 input {
   font-size: 1rem;
   padding: 0.25rem;
@@ -316,6 +474,25 @@ input:focus {
   justify-content: flex-end;
 }
 
+.col-5 {
+  flex: 0 0 auto;
+  width: 41.66666667%;
+  text-align: center;
+}
+
+.col-6 {
+  flex: 0 0 auto;
+  width: 41%;
+}
+
+.g-4, .gy-4 {
+  --bs-gutter-y: 10.5rem;
+  margin-top: -120px;
+}
+.g-4, .gx-4 {
+  --bs-gutter-x: 22.5rem;
+}
+
 .mx-1 {
   margin-right: var(--spacing-one);
   margin-left: var(--spacing-one);
@@ -332,8 +509,8 @@ input:focus {
 }
 
 .my-2 {
-  margin-top: var(--spacing-two);
-  margin-bottom: var(--spacing-two);
+  margin-top: 8.5rem!important;
+  margin-bottom: .5rem!important;
 }
 
 .px-1 {
