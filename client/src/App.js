@@ -20,9 +20,20 @@ import Success from './pages/Success';
 import Products from './pages/Products'
 import OrderHistory from './pages/OrderHistory';
 
-const httpLink = createHttpLink({
-  uri: '/graphql',
-});
+let httpLink;
+
+if (process.env.NODE_ENV === 'production')
+{
+  httpLink = createHttpLink({
+    uri: '/graphql',
+  });
+}
+else
+{
+  httpLink = createHttpLink({
+    uri: 'http://localhost:3001/graphql',
+  });
+}
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
@@ -35,7 +46,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: httpLink,
   cache: new InMemoryCache(),
 });
 
