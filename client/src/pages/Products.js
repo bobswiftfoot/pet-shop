@@ -7,6 +7,7 @@ const Products = () => {
     <div className="container">
       <ProductList />
       <ProductItem />
+      
     </div>
   );
 };

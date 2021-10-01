@@ -16,6 +16,7 @@ function ProductList() {
 
   useEffect(() => {
     if (data) {
+      console.log(data)
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data.products,
@@ -61,5 +62,6 @@ function ProductList() {
     </div>
   );
 }
+
 
 export default ProductList;

@@ -32,12 +32,6 @@ function Nav() {
           <div className='nav-items'>
             <Dropdown className="d-inline mx-2">
             <Button className="d-inline  products-btn mx-2" href='/products' variant="light">All Products</Button>
-              <Dropdown.Menu>
-                <Dropdown.Item href="#">Menu Item</Dropdown.Item>
-                <Dropdown.Item href="#">Menu Item</Dropdown.Item>
-                <Dropdown.Item href="#">Menu Item</Dropdown.Item>
-              </Dropdown.Menu>
-
             </Dropdown>
               <Dropdown className="d-inline mx-2" >
                 <Dropdown.Toggle className = 'dropdown' id="dropdown-autoclose-true">
@@ -45,8 +39,8 @@ function Nav() {
             </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#">Profile</Dropdown.Item>
-                  <Dropdown.Item href="#">Orders</Dropdown.Item>
+                  <Dropdown.Item href="/orderHistory">Orders</Dropdown.Item>
+                  <Dropdown.Item href="/login">Admin Page</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
 
@@ -57,7 +51,6 @@ function Nav() {
 
               <Dropdown.Menu>
                 <Dropdown.Item href="/login">Login</Dropdown.Item>
-                <Dropdown.Item href="/login">Admin Login</Dropdown.Item>
                 <Dropdown.Item href="/signup">Register</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

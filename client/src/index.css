@@ -284,12 +284,18 @@ button[disabled] {
 
 
 .carousel {
-  height: 750px;
+  height: 850px;
   width: 100%;
   margin: auto;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
   opacity: 1;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: visible;
 }
 
 .carousel-control-next,
@@ -319,7 +325,7 @@ button[disabled] {
 }
 
 .carousel-img {
-  margin-top: 50px;
+  margin-top: 170px;
   height: 500px;
   width: 600px;
   opacity: 1;
@@ -332,7 +338,14 @@ button[disabled] {
 
 .carousel-caption{
   color: black;
-  margin-bottom: -30px;
+  margin-bottom: -135px;
+  position: absolute;
+  right: 15%;
+  left: 15%;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #fff;
+  text-align: center;
 }
 
 .carousel-item {
@@ -350,7 +363,9 @@ button[disabled] {
 
 }
 
-.addtocart-btn {
+.addtocart-btn,
+.register-btn,
+.login-btn {
   color: black;
   background-color: rgb(255, 193, 100);
   border-width: 3px;
@@ -386,6 +401,7 @@ button[disabled] {
   margin: auto;
   background-color: white;
   border: none;
+  box-shadow: 10px 10px 20px #c7c7c7;
 }
 
 /* .img {
@@ -400,6 +416,7 @@ button[disabled] {
   width: 75%;
   opacity: .7;
   border-radius: 1000px;
+  border: 2px solid rgb(0, 0, 0);
   margin: auto;
   margin-top: 30px;
 }
@@ -439,6 +456,24 @@ form {
 
 .login-signup-form {
   justify-content: center;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 2px solid #000000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 /* .col {

@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
-
 const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
 
@@ -20,7 +19,7 @@ async function startServer()
     await server.start();
 
     server.applyMiddleware({ app });
-
+    
     //Save the path to use in the log later on.
     serverPath = server.graphqlPath;
 }

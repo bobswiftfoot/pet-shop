@@ -38,7 +38,7 @@ function HomeCard() {
         <Carousel.Caption>
           <h3>Second slide label</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <Button className="d-inline  addtocart-btn mx-2" href='/products' variant="light">Add To Cart</Button>
+          <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={4000}>
@@ -50,7 +50,7 @@ function HomeCard() {
         <Carousel.Caption>
           <h3>Third slide label</h3>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          <Button className="d-inline  addtocart-btn mx-2" href='/products' variant="light">Add To Cart</Button>
+          <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={4000}>
@@ -62,7 +62,7 @@ function HomeCard() {
         <Carousel.Caption>
           <h3>Third slide label</h3>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          <Button className="d-inline  addtocart-btn mx-2" href='/products' variant="light">Add To Cart</Button>
+          <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={4000}>
@@ -74,7 +74,7 @@ function HomeCard() {
         <Carousel.Caption>
           <h3>Third slide label</h3>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          <Button className="d-inline  addtocart-btn mx-2" href='/products' variant="light">Add To Cart</Button>
+          <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Row xs={1} md={2} className="g-4">

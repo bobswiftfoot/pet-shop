@@ -56,7 +56,7 @@ function Login(props) {
                         onChange={handleChange} />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button className='login-btn' variant="primary" type="submit">
                     Login
                 </Button>
             </Form>
