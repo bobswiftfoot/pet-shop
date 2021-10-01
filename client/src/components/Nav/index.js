@@ -41,13 +41,12 @@ function Nav() {
             </Dropdown>
               <Dropdown className="d-inline mx-2" >
                 <Dropdown.Toggle className = 'dropdown' id="dropdown-autoclose-true">
-                  Other
+                  User
             </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#">Menu Item</Dropdown.Item>
-                  <Dropdown.Item href="#">Menu Item</Dropdown.Item>
-                  <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+                  <Dropdown.Item href="#">Profile</Dropdown.Item>
+                  <Dropdown.Item href="#">Orders</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
 
@@ -58,6 +57,7 @@ function Nav() {
 
               <Dropdown.Menu>
                 <Dropdown.Item href="/login">Login</Dropdown.Item>
+                <Dropdown.Item href="/login">Admin Login</Dropdown.Item>
                 <Dropdown.Item href="/signup">Register</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
