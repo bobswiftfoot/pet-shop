@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Admin from './pages/Admin';
 import Nav from './components/Nav';
+import Cart from './components/Cart'
 import { StoreProvider } from './utils/GlobalState';
 import Success from './pages/Success';
 import Products from './pages/Products'
@@ -66,6 +67,7 @@ function App() {
               <Route exact path="/products/" component={Products} />
               <Route exact path="/products/:id" component={Detail} />
               <Route exact path="/admin" component={Admin} />
+              <Route exact path="/cart" component={Cart} />
               <Route component={NoMatch} />
             </Switch>
           </StoreProvider>

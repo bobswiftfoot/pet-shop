@@ -68,7 +68,7 @@ function ProductItem(item) {
 
         <Card.Img className='product-page-img'variant="top" src={dogfood} />
         <Card.Body>
-        <Link to={`/products/${_id}`}>
+        <Link to={`/products/${_id}`} className='product-link'>
           <Card.Title className='product-card-h2'>{name}</Card.Title>
           <Card.Text>
             ${price}

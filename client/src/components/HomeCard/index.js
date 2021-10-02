@@ -73,7 +73,6 @@ function HomeCard() {
             />
         <Carousel.Caption className="carousel-caption" >
           <h3>{ProductItem}</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
         </Carousel.Caption>
       </Carousel.Item>
