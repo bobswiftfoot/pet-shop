@@ -28,8 +28,16 @@ const resolvers =
         categories: async () => {
             return await Category.find().populate("subcategories");
         },
-        subcategories: async (parent, { _id }) => {
-            return await Category.findById(_id);
+        subcategories: async (parent, { _id }) => 
+        {
+            const parentCategory = await Category.findById(_id).populate("subcategories");
+            const subcategories = [];
+            for(let i = 0; i < parentCategory.subcategories.length; i++)
+            {
+                const category = await Category.findById(parentCategory.subcategories[i]._id);
+                subcategories.push(category);
+            }
+            return subcategories;
         },
         products: async (parent, { category }) => {
             const params = {};
