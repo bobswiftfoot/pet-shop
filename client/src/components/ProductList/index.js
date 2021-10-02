@@ -13,7 +13,7 @@ function ProductList() {
   const { currentCategory } = state;
 
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
-
+  console.log(data)
   useEffect(() => {
     if (data) {
       console.log(data)
@@ -49,7 +49,7 @@ function ProductList() {
       <h2>Our Products</h2>
         <div className="flex-row">
           {filterProducts().map((product) => (
-            <ProductItem
+            <ProductItem  
               key={product._id}
               _id={product._id}
               image={product.image}

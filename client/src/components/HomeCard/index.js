@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
+import ProductItem from '../ProductItem';
+import { useStoreContext } from '../../utils/GlobalState';
+import { UPDATE_PRODUCTS } from '../../utils/actions';
+import { useQuery } from '@apollo/client';
+import { QUERY_FEATURED_PRODUCTS } from '../../utils/queries';
+import { idbPromise } from '../../utils/helpers';
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,69 +20,66 @@ import dogfood from '../../assets/images/dogfood.jpg';
 import cattree from '../../assets/images/cattree.jpg';
 
 function HomeCard() {
+  const [state, dispatch] = useStoreContext();
+
+  const { currentCategory } = state;
+
+  const { loading, data } = useQuery(QUERY_FEATURED_PRODUCTS);
+  useEffect(() => {
+    if (data) {
+      console.log(data)
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        products: data.products,
+      });
+      data.products.forEach((product) => {
+        idbPromise('products', 'put', product);
+      });
+    } else if (!loading) {
+      idbPromise('products', 'get').then((products) => {
+        dispatch({
+          type: UPDATE_PRODUCTS,
+          products: products,
+        });
+      });
+    }
+  }, [data, loading, dispatch]);
+
+  function filterProducts() {
+    // if (currentCategory) {
+    //   console.log('hello');
+    //   return state.products;
+    // }
+
+    return state.products.filter(
+      (product) => product.featuredProduct);
+
+  }
+
+  console.log(state.products);
+
   return (
 
     <Carousel className="carousel">
-      <Carousel.Item className="carousel-item" interval={1000000}>
-        <img
-          className="carousel-img "
-          src={kennel}
-          alt="First slide"
-        />
+        {filterProducts().map((product) => (
+      <Carousel.Item className="carousel-item" interval={1000000}> 
+            <ProductItem
+              key={product._id}
+              _id={product._id}
+              image={product.image}
+              name={product.name}
+              price={product.price}
+              quantity={product.quantity}
+            />
         <Carousel.Caption className="carousel-caption" >
-          <h3>Multi-purpose Kennel</h3>
+          <h3>{ProductItem}</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
         </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item interval={4000}>
-        <img
-          className="carousel-img"
-          src={fishtank}
-          alt="Second slide"
-        />
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item interval={4000}>
-      <img
-          className="carousel-img"
-          src={birdcage}
-          alt="Second slide"
-        />
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item interval={4000}>
-        <img
-          className="carousel-img"
-          src={dogfood}
-          alt="Third slide"
-        />
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item interval={4000}>
-        <img
-          className="carousel-img"
-          src={cattree}
-          alt="Third slide"
-        />
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
-        </Carousel.Caption>
-      </Carousel.Item>
+        ))}
+
+      
       <Row xs={1} md={2} className="g-4">
   {Array.from({ length: 4 }).map((_, idx) => (
     <Col className='home-product-col'>

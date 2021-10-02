@@ -1,7 +1,7 @@
 :root {
   --primary: #00bb38;
   --secondary: #db7e03;
-  --tertiary: #c0644d;
+  --tertiary: #4da5c0;
   --light: #fafafa;
   --dark: #272f32;
   --error: rgb(228, 46, 1);
@@ -273,13 +273,19 @@ button[disabled] {
 .card {
   width: 100%;
   height: 300px;
-  background-color: #909090;
+  background-color: #ffffff;
   text-align: center;
   color:rgba(0, 0, 0, 0.5);
   justify-content: center;
   font-size: 20px;
   margin: auto;
   border: none;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+  margin-top: -20px;
 }
 
 
@@ -324,7 +330,7 @@ button[disabled] {
   opacity: .3;
 }
 
-.carousel-img {
+.carousel-item img {
   margin-top: 170px;
   height: 500px;
   width: 600px;
@@ -480,9 +486,9 @@ form {
   width: 50%;
 } */
 
-.product-page-col {
+/* .product-page-col {
   width: 25%;
-}
+} */
 
 .prod-g-4, .prod-gx-4 {
   --bs-gutter-x: 1.5rem;
@@ -490,6 +496,7 @@ form {
 .prod-g-4, .prod-gy-4 {
   --bs-gutter-y: 9.5rem;
   margin-top: -101px;
+  margin-bottom: 200px;
 }
 
 .products-container-text h2 {
@@ -535,6 +542,8 @@ input:focus {
 .flex-row {
   display: flex;
   flex-wrap: wrap;
+  margin-left: 60px;
+  margin-top: 100px;
 }
 
 .space-between {
