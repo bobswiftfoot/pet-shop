@@ -253,3 +253,35 @@ export const QUERY_CHECKOUT = gql`
     }
   }
 `;
+
+export const QUERY_ME = gql`
+  {
+    me {
+        _id
+        firstName
+        lastName
+        userName
+        email
+        orders 
+        {
+            _id
+            purchaseDate
+            products 
+            {
+                _id 
+                name
+            }
+        }
+        reviews 
+        {
+            _id
+            reviewText
+            rating
+            product 
+            {
+                name
+            }
+        }
+    }
+  }
+`;

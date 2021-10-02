@@ -8,6 +8,7 @@ const typeDefs = gql`
     lastName: String
     userName: String
     email: String
+    orders: [Order]
     reviews: [Review]
     admin: Boolean
   }

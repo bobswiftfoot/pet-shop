@@ -62,7 +62,7 @@ function Signup(props) {
 
   <Form.Group className="mb-3" controlId="formBasicPassword">
     <Form.Label>Username</Form.Label>
-    <Form.Control placeholder="Last"
+    <Form.Control placeholder="User"
             name="userName"
             type="userName"
             id="userName"
@@ -90,7 +90,7 @@ function Signup(props) {
             onChange={handleChange} />
   </Form.Group>
 
-  <Button className='register-btn' variant="primary" type="submit">
+  <Button variant="primary" type="submit">
     Register
   </Button>
 </Form>
