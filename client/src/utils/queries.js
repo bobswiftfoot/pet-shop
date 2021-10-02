@@ -20,6 +20,7 @@ export const QUERY_ALL_USERS = gql`
                     name
                 }
             }
+            admin
         }
     }
 `;
@@ -87,6 +88,7 @@ export const QUERY_ALL_PRODUCTS = gql`
             price
             category 
             {
+                _id
                 name
             }
             rating
@@ -188,6 +190,26 @@ export const QUERY_REVIEWS = gql`
     query reviews($reviewsUser: ID, $reviewsProduct: ID) 
     {
         reviews(user: $reviewsUser, product: $reviewsProduct) 
+        {
+            _id
+            reviewText
+            rating
+            user 
+            {
+                userName
+            }
+            product 
+            {
+                name
+            }
+        }
+    }
+`;
+
+export const QUERY_ALL_REVIEWS = gql`
+    query reviews
+    {
+        reviews
         {
             _id
             reviewText

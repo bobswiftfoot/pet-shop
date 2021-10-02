@@ -9,6 +9,7 @@ const typeDefs = gql`
     userName: String
     email: String
     reviews: [Review]
+    admin: Boolean
   }
 
   type Category 
