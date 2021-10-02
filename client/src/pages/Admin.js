@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from '@apollo/client';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
 import { QUERY_ALL_CATEGORIES } from '../utils/queries';
 
 const Admin = () =>
@@ -12,11 +13,9 @@ const Admin = () =>
 
     const { loading: loadingCategories, data: categoryData } = useQuery(QUERY_ALL_CATEGORIES);
 
-
     function toggleCategories()
     {
         setshowCategories(!showCategories);
-        console.log(categoryData);
     };
 
     return (
@@ -29,8 +28,21 @@ const Admin = () =>
                             <InputGroup>
                                 <InputGroup.Text>Name:</InputGroup.Text>
                                 <FormControl type="text" placeholder="Name" defaultValue={category.name}></FormControl>
-                                
                             </InputGroup>
+                            {(category.subcategories.length > 0) ?
+                                <InputGroup>
+                                    <InputGroup.Text>Subcategories:</InputGroup.Text>
+                                    {category.subcategories.map((subcategory) => (
+                                    <Form.Select>
+                                        {categoryData.categories.map(listCategory => (
+                                            (listCategory._id === subcategory._id) ?
+                                                <option id={listCategory._id} selected>{listCategory.name}</option> :
+                                                <option id={listCategory._id}>{listCategory.name}</option>
+                                        ))}
+                                    </Form.Select>
+                                    ))}
+                                </InputGroup>
+                            : null}
                         </ListGroup.Item>
                     ))}
                 </ListGroup>
@@ -38,5 +50,15 @@ const Admin = () =>
         </div>
     );
 };
-
+{/* Use this in Product section 
+                            <InputGroup>
+                                <InputGroup.Text>Category:</InputGroup.Text>
+                                <Form.Select>
+                                {categoryData.categories.map(listCategory => (
+                                    (listCategory._id === category._id) ?
+                                        <option id={listCategory._id} selected>{listCategory.name}</option> :
+                                        <option id={listCategory._id}>{listCategory.name}</option>
+                                    ))}
+                                </Form.Select>
+                            </InputGroup> */}
 export default Admin;
