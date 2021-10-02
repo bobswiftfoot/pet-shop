@@ -90,7 +90,7 @@ function Signup(props) {
             onChange={handleChange} />
   </Form.Group>
 
-  <Button variant="primary" type="submit">
+  <Button className='register-btn' variant="primary" type="submit">
     Register
   </Button>
 </Form>

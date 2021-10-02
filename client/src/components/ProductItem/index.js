@@ -46,23 +46,20 @@ function ProductItem(item) {
   }
 
   return (
-<Row xs={1} md={2} className="prod-g-4">
-  {Array.from({ length: 14 }).map((_, idx) => (
-    <Col className='product-page-col'>
-      <Card className='product-page-cards'>
-        <Card.Img className='product-page-img'variant="top" src={dogfood} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a longer card with supporting text below as a natural
-
-          </Card.Text>
-        </Card.Body>
-      </Card>
-    </Col>
-  ))}
-</Row>
-
+    <div className="card px-1 py-1">
+      <Link to={`/products/${_id}`}>
+        <img
+          alt={name}
+          src={`/images/${image}`}
+        />
+        <p>{name}</p>
+      </Link>
+      <div>
+        <div>{quantity} {pluralize("item", quantity)} in stock</div>
+        <span>${price}</span>
+      </div>
+      <button onClick={addToCart}>Add to cart</button>
+</div>
 
   );
 }
