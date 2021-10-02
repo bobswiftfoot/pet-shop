@@ -3,19 +3,22 @@ import { gql } from '@apollo/client';
 export const QUERY_ALL_USERS = gql`
     query users 
     {
-        _id
-        firstName
-        lastName
-        userName
-        email
-        reviews 
+        users
         {
             _id
-            reviewText
-            rating
-            product 
+            firstName
+            lastName
+            userName
+            email
+            reviews 
             {
-                name
+                _id
+                reviewText
+                rating
+                product 
+                {
+                    name
+                }
             }
         }
     }
@@ -49,12 +52,15 @@ export const QUERY_USER = gql`
 export const QUERY_ALL_CATEGORIES = gql`
     query categories
     {
-        _id
-        name
-        subcategories 
+        categories
         {
             _id
             name
+            subcategories 
+            {
+                _id
+                name
+            }
         }
     }
 `;
@@ -73,22 +79,25 @@ export const QUERY_SUBCATEGORIES = gql`
 export const QUERY_ALL_PRODUCTS = gql`
     query products 
     {
-        _id
-        name
-        description
-        price
-        category 
+        products
         {
+            _id
             name
-        }
-        rating
-        featuredProduct
-        reviews 
-        {
-            reviewText
-            user 
+            description
+            price
+            category 
             {
-                userName
+                name
+            }
+            rating
+            featuredProduct
+            reviews 
+            {
+                reviewText
+                user 
+                {
+                    userName
+                }
             }
         }
     }
