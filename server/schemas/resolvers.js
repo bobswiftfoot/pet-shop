@@ -156,7 +156,7 @@ const resolvers =
             throw new AuthenticationError('Not logged in');
         },
         editCategory: async (parent, args) => {
-            const category = await Category.findOneAndUpdate(args._id, args);
+            const category = await Category.findOneAndUpdate({_id: args._id}, { name: args.name, subcategories: args.subcategories});
             return category;
         },
         removeCategory: async (parent, { _id }) => {
