@@ -12,29 +12,7 @@ function Nav() {
   function showNavigation() {
     if (Auth.loggedIn()) {
       return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/orderHistory">
-              Order History
-            </Link>
-          </li>
-          <li className="mx-1">
-            <Link to="/profile">
-              Profile
-            </Link>
-          </li>
-          <li className="mx-1">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
-              Logout
-            </a>
-          </li>
-        </ul>
-      );
-    } else {
-      return (
-        <>
-          <div className='nav-items'>
+         <div className='nav-items'>
             <Dropdown className="d-inline mx-2">
             <Button className="d-inline  products-btn mx-2" href='/products' variant="light">All Products</Button>
             </Dropdown>
@@ -44,11 +22,33 @@ function Nav() {
             </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item href="/orderHistory">Orders</Dropdown.Item>
-                  <Dropdown.Item href="/login">Admin Page</Dropdown.Item>
+                  <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                  <Dropdown.Item href="/admin">Admin Page</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
 
+            <Dropdown className="d-inline mx-2">
+              <Dropdown.Toggle className = 'dropdown' id="dropdown-autoclose-true">
+                🔔
+            </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="/login">Login</Dropdown.Item>
+                <Dropdown.Item href="/" onClick={() => Auth.logout()}>Log Out</Dropdown.Item>
+                <Dropdown.Item href="/signup">Register</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Button href='/cart' className="d-inline cart-btn mx-2" variant="light">🛒</Button>
+          </div>
+      );
+    } else {
+      return (
+        <>
+          <div className='nav-items'>
+            <Dropdown className="d-inline mx-2">
+            <Button className="d-inline  products-btn mx-2" href='/products' variant="light">All Products</Button>
+            </Dropdown>
+              
             <Dropdown className="d-inline mx-2">
               <Dropdown.Toggle className = 'dropdown' id="dropdown-autoclose-true">
                 🔔

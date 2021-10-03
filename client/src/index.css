@@ -586,6 +586,12 @@ form {
   color:black;
 }
 
+.profile-card-body:hover {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+  margin-top: -20px;
+  transform: none;
+}
 
 /* .card {
   width: 75%;

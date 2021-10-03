@@ -53,32 +53,20 @@ function CategoryMenu() {
   };
 
   return (
-    <Container className='category-menu'>
-  <Row>
-  <Col xs={2} md={1}>
-      <Image src={wolf} roundedCircle />
-    </Col>
-    <Col xs={2} md={1}>
-      <Image src={tiger} roundedCircle />
-    </Col>
-    <Col xs={2} md={1}>
-      <Image src={shark} roundedCircle />
-    </Col>
-    <Col xs={2} md={1}>
-      <Image src={reptile} roundedCircle />
-    </Col>
-    <Col xs={2} md={1}>
-      <Image src={eagle} roundedCircle />
-    </Col>
-    <Col xs={2} md={1}>
-      <Image src={rodent} roundedCircle />
-    </Col>
-    <Col xs={2} md={1}>
-      <Image src={gorilla} roundedCircle />
-      <h3>Exotic</h3>
-    </Col>
-  </Row>
-</Container>
+    <div>
+      <h2>Choose a Category:</h2>
+      {categories.map((item) => (
+        <button
+          key={item._id}
+          onClick={() => {
+            handleClick(item._id);
+          }}
+        >
+          {item.name}
+        </button>
+      ))}
+    </div>
+
   );
 }
 
