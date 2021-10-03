@@ -63,6 +63,7 @@ const typeDefs = gql`
     users: [User]
     user(_id: ID!): User
     categories: [Category]
+    topCategories: [Category]
     subcategories(_id: ID!): [Category]
     products(category: ID): [Product]
     product(_id: ID!): Product

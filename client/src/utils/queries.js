@@ -66,6 +66,22 @@ export const QUERY_ALL_CATEGORIES = gql`
     }
 `;
 
+export const QUERY_TOPCATEGORIES = gql`
+    query topCategories 
+    {
+        topCategories 
+        {
+            _id
+            name
+            subcategories 
+            {
+                _id
+                name
+            }
+        }
+    }
+`;
+
 export const QUERY_SUBCATEGORIES = gql`
     query subcategories($id: ID!) 
     {

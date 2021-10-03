@@ -28,6 +28,17 @@ const resolvers =
         categories: async () => {
             return await Category.find().populate("subcategories");
         },
+        topCategories: async (parent, { _id }) => 
+        {
+            const categories =  await Category.find().populate("subcategories");
+            const topCategories = [];
+            for(let i = 0; i < categories.length; i++)
+            {
+                if(categories[i].subcategories)
+                    topCategories.push(categories[i]);
+            }
+            return topCategories;
+        },
         subcategories: async (parent, { _id }) => 
         {
             const parentCategory = await Category.findById(_id).populate("subcategories");
