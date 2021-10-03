@@ -7,6 +7,17 @@ import {
 } from '../../utils/actions';
 import { QUERY_ALL_CATEGORIES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+import wolf from '../../assets/images/wolf.jpg';
+import tiger from '../../assets/images/tiger.jpg';
+import shark from '../../assets/images/whale-shark.jpg';
+import reptile from '../../assets/images/reptile.jpg';
+import eagle from '../../assets/images/eagle.jpg';
+import rodent from '../../assets/images/rodent.jpg';
+import gorilla from '../../assets/images/gorilla.jpg';
 
 function CategoryMenu() {
   const [state, dispatch] = useStoreContext();
@@ -42,19 +53,32 @@ function CategoryMenu() {
   };
 
   return (
-    <div>
-      <h2>Choose a Category:</h2>
-      {categories.map((item) => (
-        <button
-          key={item._id}
-          onClick={() => {
-            handleClick(item._id);
-          }}
-        >
-          {item.name}
-        </button>
-      ))}
-    </div>
+    <Container className='category-menu'>
+  <Row>
+  <Col xs={2} md={1}>
+      <Image src={wolf} roundedCircle />
+    </Col>
+    <Col xs={2} md={1}>
+      <Image src={tiger} roundedCircle />
+    </Col>
+    <Col xs={2} md={1}>
+      <Image src={shark} roundedCircle />
+    </Col>
+    <Col xs={2} md={1}>
+      <Image src={reptile} roundedCircle />
+    </Col>
+    <Col xs={2} md={1}>
+      <Image src={eagle} roundedCircle />
+    </Col>
+    <Col xs={2} md={1}>
+      <Image src={rodent} roundedCircle />
+    </Col>
+    <Col xs={2} md={1}>
+      <Image src={gorilla} roundedCircle />
+      <h3>Exotic</h3>
+    </Col>
+  </Row>
+</Container>
   );
 }
 

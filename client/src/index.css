@@ -226,6 +226,11 @@ header a:hover {
   color: #000;
   background-color: transparent;
   text-decoration: none;
+  transform: scale(1.05);
+}
+
+.btn:hover {
+  transform: scale(1.05)
 }
 
 .show>.btn-primary.dropdown-toggle {
@@ -245,8 +250,38 @@ header a:hover {
   box-shadow: 0 0 0 0.25rem rgb(255 255 255 / 50%);
 }
 
+.cart-btn {
+  width: 500px;
+  margin: auto;
+  margin-top: 60px;
+  background-color: transparent;
+  border: none;
+}
+
+.cart-btn:hover {
+  transform: scale(1.05)
+}
+
 .cart {
-  margin-left: 50px;
+  width: 500px;
+  margin: auto;
+  margin-top: 60px;
+  border-width: 2px;
+  border-color:black;
+  border-style: solid;
+  border-radius: 6px;
+}
+
+.cart h2 {
+  text-align: center;
+}
+
+.cart span {
+  margin-right: 10px;
+}
+
+.cart span:hover {
+  transform: none;
 }
 
 /* button {
@@ -505,6 +540,27 @@ form {
 /* .product-page-col {
   width: 25%;
 } */
+
+.category-menu {
+  margin-top: 100px;
+  width: 200%;
+}
+
+.category-menu image{
+  height: 60px;
+  width: 50px;
+}
+
+.rounded-circle {
+  border-radius: 81%!important;
+  width: 150px;
+  height: 150px;
+  border-width: 5px;
+  border-color: #000000;
+  border-style: solid;
+  margin-bottom: 50px;
+  margin-left: 115px;
+}
 
 .prod-g-4, .prod-gx-4 {
   --bs-gutter-x: 1.5rem;

@@ -59,7 +59,7 @@ function Nav() {
                 <Dropdown.Item href="/signup">Register</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Button href='/cart' className="d-inline cart mx-2" variant="light">🛒</Button>
+            <Button href='/cart' className="d-inline cart-btn mx-2" variant="light">🛒</Button>
           </div>
         </>
 
