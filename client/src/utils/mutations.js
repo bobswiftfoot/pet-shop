@@ -14,6 +14,20 @@ export const ADD_USER = gql`
   }
 `;
 
+export const REMOVE_USER = gql`
+  mutation removeUser($removeUserId: ID!) 
+  {
+    removeUser(_id: $removeUserId) 
+    {
+      _id
+      firstName
+      lastName
+      userName
+      email
+    }
+  }
+`;
+
 export const ADD_CATEGORY = gql`
   mutation addCategory($addCategoryName: String!, $addCategorySubcategories: [ID]) 
   {

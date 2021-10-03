@@ -78,6 +78,7 @@ const typeDefs = gql`
   {
     login(email: String!, password: String!): Auth
     addUser(firstName: String!, lastName: String!, userName: String!, email: String!, password: String!): User
+    removeUser(_id: ID!): User
     addCategory(name: String!, subcategories: [ID]): Category
     addOrder(products: [ID]!): Order
     editCategory(_id: ID!, name: String, subcategories: [ID]): Category

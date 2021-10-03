@@ -1,11 +1,12 @@
 import React from "react";
 import { useMutation } from '@apollo/client';
 import { ListGroup, InputGroup, FormControl, Form, Button } from 'react-bootstrap';
-import { EDIT_PRODUCT } from '../../utils/mutations';
+import { EDIT_PRODUCT, REMOVE_PRODUCT } from '../../utils/mutations';
 
 const AdminProduct = (props) =>
 {
     const [editProduct] = useMutation(EDIT_PRODUCT);
+    const [removeProduct] = useMutation(REMOVE_PRODUCT);
 
     const handleSaveProduct = async (event) =>
     {
@@ -19,12 +20,18 @@ const AdminProduct = (props) =>
         try
         {
             await editProduct({ variables: { editProductId: id, editProductName: nameValue, editProductDescription: descriptionValue, editProductImage: imageValue,  editProductPrice: priceValue,editProductCategory: categoryValue,editProductFeaturedProduct: featuredValue } });
-            window.location.reload();
         }
         catch (e)   
         {
             console.log(e);
         }
+    };    
+
+    const handleDeleteProduct = async (event) =>
+    {
+        const { id } = event.target.parentNode.children[0].children[1];
+        await removeProduct({ variables: { removeProductId: id } });
+        window.location.reload();
     };
 
     return (
@@ -64,6 +71,7 @@ const AdminProduct = (props) =>
                         {React.createElement('input', { type: 'checkbox', defaultChecked: product.featuredProduct })}
                     </InputGroup>
                     <Button type="submit" onClick={handleSaveProduct}>Save Product</Button>
+                    <Button type="submit" variant="danger" onClick={handleDeleteProduct}>Delete Product</Button>
                 </ListGroup.Item>
             ))}
         </ListGroup>

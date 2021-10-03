@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom'
 import { useMutation } from '@apollo/client';
 import { ListGroup, InputGroup, FormControl, Form, Button} from 'react-bootstrap';
-import { EDIT_CATEGORY } from '../../utils/mutations';
+import { EDIT_CATEGORY, REMOVE_CATEGORY } from '../../utils/mutations';
 
 const SubcategoryFormSelect = (props) =>
 {
@@ -47,6 +47,7 @@ const SubcategoryFormSelect = (props) =>
 const AdminCategory = (props) =>
 {
     const [editCategory] = useMutation(EDIT_CATEGORY);
+    const [removeCategory] = useMutation(REMOVE_CATEGORY);
 
     const handleSaveCategory = async (event) =>
     {
@@ -65,11 +66,19 @@ const AdminCategory = (props) =>
         try
         {
             await editCategory({ variables: { editCategoryId: id, editCategoryName: value, editCategorySubcategories: Array.from(subcategories) } });
+            window.location.reload();
         }
         catch (e)   
         {
             console.log(e);
         }
+    };
+    
+    const handleDeleteCategory = async (event) =>
+    {
+        const { id } = event.target.parentNode.children[0].children[1];
+        await removeCategory({ variables: { removeCategoryId: id } });
+        window.location.reload();
     };
 
     const handleAddSubcategory = (event) =>
@@ -87,7 +96,7 @@ const AdminCategory = (props) =>
             }
         });
         ReactDOM.render(<SubcategoryFormSelect category={parentNode.id} categories={props.categoryData.categories} subCategories={subcategories}/>, container);
-    };
+    };    
 
     return (
         <ListGroup>
@@ -109,6 +118,7 @@ const AdminCategory = (props) =>
                         <Button type="submit" onClick={handleAddSubcategory}>Add Subcategory</Button>
                     </InputGroup>
                     <Button type="submit" onClick={handleSaveCategory}>Save Category</Button>
+                    <Button type="submit" variant="danger" onClick={handleDeleteCategory}>Delete Category</Button>
                 </ListGroup.Item>
             ))}
         </ListGroup>

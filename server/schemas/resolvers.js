@@ -34,7 +34,7 @@ const resolvers =
             const topCategories = [];
             for(let i = 0; i < categories.length; i++)
             {
-                if(categories[i].subcategories)
+                if(categories[i].subcategories.length > 0)
                     topCategories.push(categories[i]);
             }
             return topCategories;
@@ -134,6 +134,10 @@ const resolvers =
             const user = await User.create(args);
             return user;
         },
+        removeUser: async (parent, {_id}) => {
+            const user = await User.findOneAndDelete({ _id: _id});
+            return user;
+        },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
@@ -171,7 +175,35 @@ const resolvers =
             return category;
         },
         removeCategory: async (parent, { _id }) => {
-            const category = await Category.findOneAndDelete(_id);
+            const category = await Category.findOneAndDelete({ _id: _id});
+            
+            //Go through all subcategories and remove what we're deleting
+            const categories =  await Category.find().populate("subcategories");
+            for(let i = 0; i < categories.length; i++)
+            {
+                if(categories[i].subcategories.length > 0)
+                {
+                    let subcategories = [];
+                    categories[i].subcategories.forEach(subcategory =>
+                    {
+                        if(subcategory._id !== _id)
+                            subcategories.push(subcategory._id)
+                    });
+                    await Category.findOneAndUpdate({_id: categories[i]._id}, { subcategories: subcategories});
+                }
+            }
+
+            //Go through all products and set the removed category to a new id
+            const products =  await Product.find().populate("category");
+            for(let p = 0; p < products.length; p++)
+            {
+                if(products[p].category === _id || products[p].category === null)
+                {
+                    console.log("Changing " + products[p].name)
+                    await Product.findOneAndUpdate({ _id: products[p]._id }, {category: categories[0]._id});
+                }
+            }
+
             return category;
         },
         addProduct: async (parent, args) => {
@@ -185,7 +217,7 @@ const resolvers =
             return product;
         },
         removeProduct: async (parent, { _id }) => {
-            const product = await Product.findOneAndDelete(_id);
+            const product = await Product.findOneAndDelete({_id: _id});
             return product;
         },
         addReview: async (parent, args) => {
