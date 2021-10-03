@@ -14,6 +14,24 @@ export const ADD_USER = gql`
   }
 `;
 
+export const EDIT_USER = gql`
+  mutation editUser($editUserId: ID!, $editUserFirstName: String, $editUserLastName: String, $editUserUserName: String, $editUserEmail: String, $editUserPassword: String) 
+  {
+    editUser(_id: $editUserId, firstName: $editUserFirstName, lastName: $editUserLastName, userName: $editUserUserName, email: $editUserEmail, password: $editUserPassword) 
+    {
+      token
+      user
+    {
+      _id
+      firstName
+      lastName
+      userName
+      email
+    }
+  }
+  }
+`;
+
 export const ADD_CATEGORY = gql`
   mutation addCategory($addCategoryName: String!, $addCategorySubcategories: [ID]) 
   {

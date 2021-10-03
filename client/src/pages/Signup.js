@@ -30,6 +30,7 @@ function Signup(props) {
     console.log(mutationResponse.data.addUser.token);
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
+    window.location.assign('/');
   };
 
   const handleChange = (event) => {

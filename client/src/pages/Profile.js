@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
-// import { EDIT_USER } from '../utils/queries';
+import { EDIT_USER } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
-// import { useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth';
 
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form';
@@ -15,130 +16,167 @@ import Modal from 'react-bootstrap/Modal';
 
 //Modal
 function MyVerticallyCenteredModal(props) {
-    // const [formState, setFormState] = useState({ email: '', password: '' });
-    // const [editUser] = useMutation(EDIT_USER);
+    const [formState, setFormState] = useState({ email: '', password: '' });
+    const [editUser] = useMutation(EDIT_USER);
 
-    // const handleFormSubmit = async (event) => {
-    //   event.preventDefault();
-    //   console.log("pre-reg");
+    const { loading, data } = useQuery(QUERY_ME);
 
-    //   const mutationResponse = await editUser({
-    //     variables: {
-    //       editUserEmail: formState.email,
-    //       editUserPassword: formState.password,
-    //       editUserFirstName: formState.firstName,
-    //       editUserLastName: formState.lastName,
-    //       editUserUserName: formState.userName
-    //     },
-    //   });
+    const user = data?.me || data?.user || {};
 
-    //   console.log("post-reg");
+    const handleEditSubmit = async (event) => {
+        event.preventDefault();
+        console.log("pre-edit");
 
-    //   console.log(mutationResponse.data.editUser.user);
-    //   console.log(mutationResponse.data.editUser.token);
-    //   const token = mutationResponse.data.editUser.token;
-    //   Auth.login(token);
+        const params = {
+            editUserId: data.me._id,
+            editUserEmail: formState.email,
+            editUserFirstName: formState.firstName,
+            editUserLastName: formState.lastName,
+            editUserUserName: formState.userName
+        };
+
+        if (formState.password) {
+            params.editUserPassword = formState.password;
+        }
+
+        console.log(params);
+
+        const mutationResponse = await editUser({
+            variables: params
+        });
+
+        console.log("post-edit");
+
+        console.log(mutationResponse.data.editUser.user);
+        console.log(mutationResponse.data.editUser.token);
+        const token = mutationResponse.data.editUser.token;
+        Auth.login(token);
+        window.location.assign('/profile');
+    };
+
+    // const [editUser, { error }] = useMutation(EDIT_USER);
+
+    // const handleEditSubmit = async (event) =>
+    // {
+    //     const { value, id } = event.target.parentNode.children[0].children[1];
+    //     try
+    //     {
+    //         await editUser({ variables: { editUserId: id, editUserFirstName: value, 
+    //             editUserLastName: value,
+    //             editUserUserName: value,
+    //             editUserEmail: value,
+    //             editUserPassword: value } });
+    //     }
+    //     catch (e)   
+    //     {
+    //         console.log(e);
+    //     }
     // };
 
-    // const handleChange = (event) => {
-    //   const { name, value } = event.target;
-    //   setFormState({
-    //     ...formState,
-    //     [name]: value,
-    //   });
-    // };
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
 
     return (
-        <Modal
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Edit Profile
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>First Name</Form.Label>
-                        <Form.Control placeholder="First"
-                            defaultValue=""
-                            name="firstName"
-                            type="firstName"
-                            id="firstName"
-                        />
-                    </Form.Group>
+        <>
+            {console.log(data)}
+            {!loading ? (
+                <Modal
+                    {...props}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                            Edit Profile
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Control placeholder="First Name"
+                                    defaultValue={`${data.me.firstName}`}
+                                    name="firstName"
+                                    type="firstName"
+                                    id="firstName"
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control placeholder="Last"
-                            name="lastName"
-                            type="lastName"
-                            id="lastName"
-                        />
-                    </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Last Name</Form.Label>
+                                <Form.Control placeholder="Last Name"
+                                    defaultValue={`${data.me.lastName}`}
+                                    name="lastName"
+                                    type="lastName"
+                                    id="lastName"
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control placeholder="User"
-                            name="userName"
-                            type="userName"
-                            id="userName"
-                        />
-                    </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control placeholder="Username"
+                                    defaultValue={`${data.me.userName}`}
+                                    name="userName"
+                                    type="userName"
+                                    id="userName"
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control placeholder="example123@email.com"
-                            name="email"
-                            type="email"
-                            id="email"
-                        />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
-                    </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control placeholder="example123@email.com"
+                                    defaultValue={`${data.me.userName}`}
+                                    name="email"
+                                    type="email"
+                                    id="email"
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control placeholder="******"
-                            name="password"
-                            type="password"
-                            id="pwd"
-                        />
-                    </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control placeholder="******"
+                                    name="password"
+                                    type="password"
+                                    id="pwd"
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
 
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button className='register-btn' variant="primary" type="submit" onClick={props.onHide}>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        {/* <Button className='register-btn' variant="primary" type="submit" onClick={props.onHide}>
                     Save!
-                </Button>
-            </Modal.Footer>
-        </Modal>
+                </Button> */}
+                        <Button className='register-btn' variant="primary" type="submit" onClick={handleEditSubmit}>
+                            Save!
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            ) : null}
+        </>
     );
 }
 
 function Profile() {
     const { loading, data } = useQuery(QUERY_ME);
 
-    const user = data?.me || data?.user || {};
-
-    // let user;
-
-    // if (data) {
-    //     user = data.user;
-    // }
-
     //for Modal
     const [modalShow, setModalShow] = useState(false);
 
     return (
         <>
-            {console.log(data)};
+            {console.log(data)}
             {!loading ? (
                 <>
                     <div className="container my-1">
@@ -148,6 +186,7 @@ function Profile() {
                         <Card className="mb-3 mx-auto">
                             <Row className="g-0">
                                 <div>
+                                    {console.log(data)}
                                     <Card.Title><h1>{`${data.me.firstName} ${data.me.lastName}`}</h1></Card.Title>
                                     <Card.Body>
                                         <h3 className="pb-1">Username: {`${data.me.userName}`}</h3>

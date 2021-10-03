@@ -139,6 +139,11 @@ const resolvers =
             const token = signToken(user);
             return { token, user };
         },
+        editUser: async (parent, args) => {
+            const user = await User.findOneAndUpdate({_id: args._id}, { firstName: args.firstName, lastName: args.lastName, userName: args.userName, email: args.email, password: args.password});
+            const token = signToken(user);
+            return { token, user };
+        },
         addCategory: async (parent, args) => {
             const category = await Category.create(args);
             return category;
