@@ -6,20 +6,37 @@ import { EDIT_CATEGORY } from '../../utils/mutations';
 
 const SubcategoryFormSelect = (props) =>
 {
-    const subCategoryId = props.subcategory ? props.subcategory._id : props.categories[0]._id;
-
+    const subCategoryId = props.subcategory ? props.subcategory._id : props.category;
+  
     const handleDeleteSubcategory = (event) =>
     {
         event.target.parentNode.remove();
     }
-
     return (
         <React.Fragment>
             <Form.Select name="subcategories" key={subCategoryId} id={props.category}>
-            {props.categories.map(listCategory => (
-                listCategory._id === subCategoryId) ?
-                <option key={listCategory._id} id={listCategory._id} selected>{listCategory.name}</option> :
-                <option key={listCategory._id} id={listCategory._id}>{listCategory.name}</option>
+            {props.categories.map(listCategory => 
+                {
+                    //Don't show the parent Category
+                    if(listCategory._id !== props.category)
+                    {
+                        let hide = false;
+                        props.subCategories.forEach(subcategory => 
+                            {
+                                //Don't show options that other subcategories are set to
+                                if(subcategory._id === listCategory._id && subcategory._id !== subCategoryId)
+                                {
+                                    hide = true;
+                                }
+                            })
+                        if(hide)
+                            return null;
+                        return (listCategory._id === subCategoryId) ?
+                            <option key={listCategory._id} id={listCategory._id} selected>{listCategory.name}</option> :
+                            <option key={listCategory._id} id={listCategory._id}>{listCategory.name}</option>
+                    }
+                    return null;
+                }
             )}
             </Form.Select>
             <Button variant="danger" onClick={handleDeleteSubcategory}>Remove</Button>
@@ -29,25 +46,25 @@ const SubcategoryFormSelect = (props) =>
 
 const AdminCategory = (props) =>
 {
-    const [editCategory, { error }] = useMutation(EDIT_CATEGORY);
+    const [editCategory] = useMutation(EDIT_CATEGORY);
 
     const handleSaveCategory = async (event) =>
     {
         const { value, id } = event.target.parentNode.children[0].children[1];
         const subCategoryElements = event.target.parentNode.children[1].children;
-        let subcategories = [];
+        let subcategories = new Set();
+        console.log(subCategoryElements)
         if(subCategoryElements.length > 1)
         {
             for(let i = 1; i < subCategoryElements.length - 1; i++)
             {
                 if(subCategoryElements[i].children[0].selectedOptions)
-                    subcategories.push(subCategoryElements[i].children[0].selectedOptions[0].id);
+                    subcategories.add(subCategoryElements[i].children[0].selectedOptions[0].id);
             }
         }
-        console.log(value + " " + id + " " + subcategories)
         try
         {
-            await editCategory({ variables: { editCategoryId: id, editCategoryName: value, editCategorySubcategories: subcategories } });
+            await editCategory({ variables: { editCategoryId: id, editCategoryName: value, editCategorySubcategories: Array.from(subcategories) } });
         }
         catch (e)   
         {
@@ -59,8 +76,17 @@ const AdminCategory = (props) =>
     {
         const parentNode = event.target.parentNode;
         const container = document.createElement("div");
+        container.id = parentNode.id;
         parentNode.insertBefore(container, event.target);
-        ReactDOM.render(<SubcategoryFormSelect category={parentNode.id} categories={props.categoryData.categories}/>, container);
+        let subcategories = [];
+        props.categoryData.categories.forEach(category =>
+        {
+            if(category._id === parentNode.id)
+            {
+                subcategories = category.subcategories;
+            }
+        });
+        ReactDOM.render(<SubcategoryFormSelect category={parentNode.id} categories={props.categoryData.categories} subCategories={subcategories}/>, container);
     };
 
     return (
@@ -75,8 +101,8 @@ const AdminCategory = (props) =>
                         <InputGroup.Text>Subcategories:</InputGroup.Text>
                         {(category.subcategories.length > 0) ?
                             category.subcategories.map((subcategory) => (
-                                <div>
-                                    <SubcategoryFormSelect subcategory={subcategory} category={category._id} categories={props.categoryData.categories} />
+                                <div key={subcategory._id} >
+                                    <SubcategoryFormSelect subcategory={subcategory} category={category._id} categories={props.categoryData.categories} subCategories={category.subcategories} />
                                 </div>
                             ))
                             : null}

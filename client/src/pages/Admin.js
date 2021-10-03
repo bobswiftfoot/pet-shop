@@ -1,8 +1,9 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
-import { ListGroup, InputGroup, FormControl, Form, Tabs, Tab} from 'react-bootstrap';
+import { ListGroup, InputGroup, Tabs, Tab} from 'react-bootstrap';
 import { QUERY_ALL_CATEGORIES, QUERY_ALL_PRODUCTS, QUERY_ALL_USERS, QUERY_ALL_REVIEWS } from '../utils/queries';
-import AdminCategory from '../components/AdminCategory'
+import AdminCategory from '../components/AdminCategory';
+import AdminProduct from '../components/AdminProduct';
 
 const Admin = () =>
 {
@@ -21,44 +22,7 @@ const Admin = () =>
                 </Tab>
                 <Tab eventKey="products" title="Products">
                     {!loadingProducts && !loadingCategories ? (
-                        <ListGroup>
-                            {productData.products.map((product) => (
-                                <ListGroup.Item key={product._id}>
-                                    <InputGroup>
-                                        <InputGroup.Text>Name:</InputGroup.Text>
-                                        <FormControl type="text" placeholder="Name" defaultValue={product.name}></FormControl>
-                                    </InputGroup>
-                                    <InputGroup>
-                                        <InputGroup.Text>Description:</InputGroup.Text>
-                                        <FormControl type="text" placeholder="Description" defaultValue={product.description}></FormControl>
-                                    </InputGroup>
-                                    <InputGroup>
-                                        <InputGroup.Text>Image:</InputGroup.Text>
-                                        {/* TODO: Change this to a drop down containing all image chioces*/}
-                                        <FormControl type="text" placeholder="Image" defaultValue={product.image}></FormControl>
-                                    </InputGroup>
-                                    <InputGroup>
-                                        <InputGroup.Text>Price:</InputGroup.Text>
-                                        <FormControl type="text" placeholder="Price" defaultValue={product.price}></FormControl>
-                                    </InputGroup>
-                                    <InputGroup>
-                                        <InputGroup.Text>Category:</InputGroup.Text>
-                                        <Form.Select key={product.category._id}>
-                                            {categoryData.categories.map(listCategory => (
-                                                listCategory._id === product.category._id) ?
-                                                <option key={listCategory._id} id={listCategory._id} selected>{listCategory.name}</option> :
-                                                <option key={listCategory._id} id={listCategory._id}>{listCategory.name}</option>
-                                            )}
-                                        </Form.Select>
-                                    </InputGroup>
-                                    <InputGroup>
-                                        <InputGroup.Text>Featured:</InputGroup.Text>
-                                        {/* Using createElement to make use of defaultChecked */}
-                                        {React.createElement('input',{type: 'checkbox', defaultChecked: product.featuredProduct})}
-                                    </InputGroup>
-                                </ListGroup.Item>
-                            ))}
-                        </ListGroup>
+                        <AdminProduct categoryData={categoryData} productData={productData}/>
                     ) : null}
                 </Tab>
                 <Tab eventKey="users" title="Users">

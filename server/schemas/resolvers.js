@@ -168,7 +168,9 @@ const resolvers =
             return product;
         },
         editProduct: async (parent, args) => {
-            const product = await Product.findOneAndUpdate(args._id, args);
+            console.log(args);
+            const product = await Product.findOneAndUpdate({_id: args._id}, { name: args.name, description: args.description, image: args.image, price: args.price, category: args.category, featuredProduct: args.featuredProduct});
+            console.log(product);
             return product;
         },
         removeProduct: async (parent, { _id }) => {
