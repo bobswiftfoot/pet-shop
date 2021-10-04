@@ -14,8 +14,8 @@ const AdminProduct = (props) =>
         const { value: descriptionValue } = event.target.parentNode.children[1].children[1];
         const { value: imageValue } = event.target.parentNode.children[2].children[1];
         const priceValue = parseFloat(event.target.parentNode.children[3].children[1].value);
-        const { id: categoryValue } = event.target.parentNode.children[4].children[1].selectedOptions[0];
-        const featuredValue = event.target.parentNode.children[5].children[1].checked;
+        const { id: categoryValue } = event.target.parentNode.children[5].children[1].selectedOptions[0];
+        const featuredValue = event.target.parentNode.children[6].children[1].checked;
 
         try
         {
@@ -36,6 +36,7 @@ const AdminProduct = (props) =>
 
     return (
         <ListGroup>
+            {console.log(props.productData)}
             {props.productData.products.map((product) => (
                 <ListGroup.Item key={product._id}>
                     <InputGroup>
@@ -54,6 +55,10 @@ const AdminProduct = (props) =>
                     <InputGroup>
                         <InputGroup.Text>Price:</InputGroup.Text>
                         <FormControl type="text" placeholder="Price" defaultValue={product.price}></FormControl>
+                    </InputGroup>
+                    <InputGroup>
+                        <InputGroup.Text>Rating:</InputGroup.Text>
+                        <InputGroup.Text>{product.rating}</InputGroup.Text>
                     </InputGroup>
                     <InputGroup>
                         <InputGroup.Text>Category:</InputGroup.Text>

@@ -28,13 +28,15 @@ const AdminReview = (props) =>
                     </InputGroup>
                     <InputGroup>
                         <InputGroup.Text>Username:</InputGroup.Text>
+                        <InputGroup.Text>{review.user.userName}</InputGroup.Text>
                     </InputGroup>
                     <InputGroup>
                         <InputGroup.Text>Product:</InputGroup.Text>
+                        <InputGroup.Text>{review.product.name}</InputGroup.Text>
                     </InputGroup>
+                    <Button type="submit" variant="danger" onClick={handleDeleteReview}>Delete Review</Button>
                 </ListGroup.Item>
             ))}
-            <Button type="submit" variant="danger" onClick={handleDeleteReview}>Delete Review</Button>
         </ListGroup>
     );
 };
