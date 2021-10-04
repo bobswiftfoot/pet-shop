@@ -97,15 +97,18 @@ function CategoryMenu() {
                     id="dropdown-item-button" 
                     title={category.name}
     >
-      {category.subCategories.map((subCategory) => (
-        <Dropdown.Item  as='button'
-                        key={subCategory._id}
-                        onClick={() => {
-                        handleClick(subCategory._id);}}  
-                        id="dropdown-item" 
-                        title={subCategory.name}>
-        {subCategory.name}</Dropdown.Item>
-      ))}  
+      {/* {category.subCategories.map((subCategory) => ( */}
+        <Dropdown.Item  
+                      // as='button'
+                      //   key={subCategory._id}
+                      //   onClick={() => {
+                      //   handleClick(subCategory._id);}}  
+                      //   id="dropdown-item" 
+                      //   title={subCategory.name}
+        >
+                        {/* {subCategory.name} */}
+        </Dropdown.Item>
+      {/* ))}   */}
 
     </DropdownButton>
     ))}

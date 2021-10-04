@@ -30,7 +30,7 @@ const AdminProduct = (props) =>
 
     const handleDeleteProduct = async (event) =>
     {
-        const { id } = event.target.parentNode.children[0].children[1];
+        const { id } = event.target.parentNode.children[0].children[1].children[0];
         await removeProduct({ variables: { removeProductId: id } });
         window.location.reload();
     };

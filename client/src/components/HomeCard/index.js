@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import Auth from "../../utils/auth";
-import { Link } from "react-router-dom";
-import ProductItem from '../ProductItem';
-import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
+import React, { useEffect, useState } from "react";
 import { useQuery } from '@apollo/client';
-import { QUERY_FEATURED_PRODUCTS } from '../../utils/queries';
+import Auth from "../../utils/auth";
+import { Link, useParams } from "react-router-dom";
+import { useStoreContext } from '../../utils/GlobalState';
+import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
+import { UPDATE_PRODUCTS } from '../../utils/actions';
+import { QUERY_FEATURED_PRODUCTS, QUERY_ALL_PRODUCTS  } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
+import ProductItem from '../ProductItem';
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -22,9 +23,16 @@ import cattree from '../../assets/images/cattree.jpg';
 function HomeCard() {
   const [state, dispatch] = useStoreContext();
 
-  const { currentCategory } = state;
+  const { id } = useParams();
 
-  const { loading, data } = useQuery(QUERY_FEATURED_PRODUCTS);
+  const [currentProduct, setCurrentProduct] = useState({});
+
+  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+
+  const { products, cart } = state;
+
+  const { loading1, data1 } = useQuery(QUERY_FEATURED_PRODUCTS);
+
   useEffect(() => {
     if (data) {
       console.log(data)
@@ -45,6 +53,33 @@ function HomeCard() {
     }
   }, [data, loading, dispatch]);
 
+  useEffect(() => {
+    // already in global store
+    if (products.length) {
+      setCurrentProduct(products.find((product) => product._id === id));
+    }
+    // retrieved from server
+    else if (data1) {
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        products: data1.products,
+      });
+
+      data.products.forEach((product) => {
+        idbPromise('products', 'put', product);
+      });
+    }
+    // get cache from idb
+    else if (!loading1) {
+      idbPromise('products', 'get').then((indexedProducts) => {
+        dispatch({
+          type: UPDATE_PRODUCTS,
+          products: indexedProducts,
+        });
+      });
+    }
+  }, [products, data1, loading1, dispatch, id]);
+
   function filterProducts() {
     // if (currentCategory) {
     //   console.log('hello');
@@ -55,6 +90,27 @@ function HomeCard() {
       (product) => product.featuredProduct);
 
   }
+
+  const addToCart = () => {
+    const itemInCart = cart.find((cartItem) => cartItem._id === id);
+    if (itemInCart) {
+      dispatch({
+        type: UPDATE_CART_QUANTITY,
+        _id: id,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+      });
+      idbPromise('cart', 'put', {
+        ...itemInCart,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+      });
+    } else {
+      dispatch({
+        type: ADD_TO_CART,
+        product: { ...currentProduct, purchaseQuantity: 1 },
+      });
+      idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
+    }
+  };
 
   console.log(state.products);
 
@@ -73,28 +129,13 @@ function HomeCard() {
             />
         <Carousel.Caption className="carousel-caption" >
           <h3>{ProductItem}</h3>
-          <Button className="addtocart-btn" href='/products' variant="light">Add To Cart</Button>
+  
         </Carousel.Caption>
       </Carousel.Item>
         ))}
 
       
-      <Row xs={1} md={2} className="g-4">
-  {Array.from({ length: 4 }).map((_, idx) => (
-    <Col className='home-product-col'>
-      <Card className='home-product-cards'>
-        <Card.Img variant="top" src={dogandcat} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a 
-            
-          </Card.Text>
-        </Card.Body>
-      </Card>
-    </Col>
-  ))}
-</Row>
+    
     </Carousel>
     
   )
