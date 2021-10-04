@@ -96,9 +96,9 @@ export const ADD_PRODUCT = gql`
 `;
 
 export const EDIT_PRODUCT = gql`
-  mutation editProduct($editProductId: ID!, $editProductName: String, $editProductDescription: String, $editProductImage: String, $editProductPrice: Float, $editProductCategory: ID, $editProductFeaturedProduct: Boolean, $editProductRating: Float) 
+  mutation editProduct($editProductId: ID!, $editProductName: String, $editProductDescription: String, $editProductImage: String, $editProductPrice: Float, $editProductCategory: ID, $editProductFeaturedProduct: Boolean) 
   {
-    editProduct(_id: $editProductId, name: $editProductName, description: $editProductDescription, image: $editProductImage, price: $editProductPrice, category: $editProductCategory, featuredProduct: $editProductFeaturedProduct, rating: $editProductRating) 
+    editProduct(_id: $editProductId, name: $editProductName, description: $editProductDescription, image: $editProductImage, price: $editProductPrice, category: $editProductCategory, featuredProduct: $editProductFeaturedProduct) 
     {
       _id
       name

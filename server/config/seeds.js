@@ -426,7 +426,7 @@ db.once('open', async () =>
     let review = await Review.create(
         {
             reviewText: 'This is the best food I have ever tasted',
-            rating: 5,
+            rating: 4,
             user: users[0]._id,
             product: products[0]._id
         });
@@ -463,12 +463,12 @@ db.once('open', async () =>
         {
             reviewText: 'Very Roomy',
             rating: 3,
-            user: users[0]._id,
+            user: users[1]._id,
             product: products[27]._id
         });
 
     await User.findOneAndUpdate(
-        { _id: users[0]._id },
+        { _id: users[1]._id },
         { $push: { reviews: review._id } });
 
     await Product.findOneAndUpdate(
@@ -479,12 +479,12 @@ db.once('open', async () =>
         {
             reviewText: 'Not a real fish',
             rating: 1,
-            user: users[0]._id,
+            user: users[2]._id,
             product: products[6]._id
         });
 
     await User.findOneAndUpdate(
-        { _id: users[0]._id },
+        { _id: users[2]._id },
         { $push: { reviews: review._id } });
 
     await Product.findOneAndUpdate(

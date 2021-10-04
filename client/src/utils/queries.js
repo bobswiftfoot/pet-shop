@@ -107,11 +107,11 @@ export const QUERY_ALL_PRODUCTS = gql`
                 _id
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName
@@ -134,11 +134,11 @@ export const QUERY_ALL_PRODUCTS_BY_CATEGORY = gql`
             {
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName
@@ -161,11 +161,11 @@ export const QUERY_PRODUCT = gql`
             {
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName
@@ -188,11 +188,11 @@ export const QUERY_FEATURED_PRODUCTS = gql`
             {
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName

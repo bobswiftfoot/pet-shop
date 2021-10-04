@@ -41,12 +41,6 @@ const productSchema = new Schema(
                 ref: 'Review',
             }
         ],
-        rating:
-        {
-            type: Number,
-            min: 0,
-            default: 0
-        },
         featuredProduct:
         {
             type: Boolean,

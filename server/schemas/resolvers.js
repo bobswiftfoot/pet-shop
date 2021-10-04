@@ -54,7 +54,7 @@ const resolvers =
             const params = {};
             if (category)
                 params.category = category;
-            return await Product.find(params).populate("category");
+            return await Product.find(params).populate("category").populate("reviews");
         },
         product: async (parent, { _id }) => {
             return await Product.findById(_id).populate("category").populate({ path: "reviews", populate: "user" });
@@ -135,7 +135,18 @@ const resolvers =
             return user;
         },
         removeUser: async (parent, {_id}) => {
-            const user = await User.findOneAndDelete({ _id: _id});
+            const user = await User.findOneAndDelete({ _id: _id}, {new: true})
+                .populate("reviews");
+            
+            //Go through all reviews and remove what we're deleting
+            for(let i = 0; i < user.reviews.length; i++)
+            {
+                const review = await Review.findOneAndRemove(user.reviews[0]._id);
+
+                await Product.findOneAndUpdate(
+                    { _id: review.product },
+                    { $pull: { reviews: user.reviews[0]._id } });
+            }
             return user;
         },
         login: async (parent, { email, password }) => {

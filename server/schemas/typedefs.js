@@ -28,7 +28,6 @@ const typeDefs = gql`
       image: String
       price: Float
       category: Category
-      rating: Float
       featuredProduct: Boolean
       reviews: [Review]
   }
@@ -84,7 +83,7 @@ const typeDefs = gql`
     editCategory(_id: ID!, name: String, subcategories: [ID]): Category
     removeCategory(_id: ID!): Category
     addProduct(name: String!, description: String, price: Float!, category: ID!, featuredProduct: Boolean): Product
-    editProduct(_id: ID!, name: String, description: String, image: String, price: Float, category: ID, featuredProduct: Boolean, rating: Float): Product
+    editProduct(_id: ID!, name: String, description: String, image: String, price: Float, category: ID, featuredProduct: Boolean): Product
     removeProduct(_id: ID!): Product
     addReview(reviewText: String!, rating: Float!, user: ID!, product: ID!): Review
     editReview(_id: ID!, reviewText: String, rating: Float): Review
