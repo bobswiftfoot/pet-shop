@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from '@apollo/client';
 import { QUERY_CHECKOUT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
+import { Link } from "react-router-dom";
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
 import { useStoreContext } from '../../utils/GlobalState';
@@ -59,21 +60,18 @@ const Cart = () => {
     });
   }
 
-  if (!state.cartOpen) {
-    return (
-      <div className="cart-closed" onClick={toggleCart}>
-        <span  aria-label="trash">
-          Cart
-        </span>
-      </div>
-    );
-  }
+  // if (!state.cartOpen) {
+  //   return (
+  //     <div className="cart-closed" onClick={toggleCart}>
+  //       <span  aria-label="trash">
+  //         Cart
+  //       </span>
+  //     </div>
+  //   );
+  //}
 
   return (
     <div className="cart">
-      <div className="close" onClick={toggleCart}>
-        [close]
-      </div>
       <h2>Shopping Cart</h2>
       {state.cart.length ? (
         <div>
@@ -87,7 +85,9 @@ const Cart = () => {
             {Auth.loggedIn() ? (
               <button onClick={submitCheckout}>Checkout</button>
             ) : (
-              <span>(log in to check out)</span>
+              <Link to='/login'>
+              <span>Log in to check out</span>
+              </Link >
             )}
           </div>
         </div>
@@ -96,7 +96,7 @@ const Cart = () => {
           <span role="img" aria-label="shocked">
             😱
           </span>
-          You haven't added anything to your cart yet!
+          Your cart is empty
         </h3>
       )}
     </div>
