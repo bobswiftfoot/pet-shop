@@ -298,6 +298,7 @@ export const QUERY_ME = gql`
                 name
             }
         }
+        admin
     }
   }
 `;
