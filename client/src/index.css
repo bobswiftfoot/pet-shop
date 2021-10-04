@@ -73,6 +73,7 @@ a {
   color: var(--tertiary);
   text-decoration: none;
   font-weight: bold;
+  font-family: 'Mali', cursive;
 }
 
 .list-child{
@@ -93,9 +94,10 @@ header {
 }
 
 header a {
+  font-family: 'Fredoka One', cursive;
   color: black;
   margin-top: 40px;
-  font-size: larger;
+  font-size: 55px;
   z-index: 3;
   position:relative;
 }
@@ -146,14 +148,14 @@ header a:hover {
   margin-left: -20px;
   background-color: rgb(1, 153, 255);
   border-radius: 1000px;
-  box-shadow: 1px 1px 1px 1px #080808;
+
 }
 
 .nav-lizard {
-  width: 100px;
-  height: 100px;
-  margin-top: -56px;
-  margin-left: -350px;
+  width: 150px;
+  height: 150px;
+  margin-top: -90px;
+  margin-left: -380px;
   background-color: rgb(255, 186, 96);
   z-index: 1;
   position:relative;
@@ -165,10 +167,12 @@ header a:hover {
 }
 
 .nav-items {
-  margin-top: 100px;
+  margin-top: 90px;
 }
 
 .dropdown {
+  font-family: 'Fredoka One', cursive;
+  font-size: 20px;
   background: rgba(233, 17, 17, 0);
   margin-left: 120px;
   border:0px  none;
@@ -178,6 +182,10 @@ header a:hover {
   color: #000;
   background-color: transparent;
   text-decoration: none;
+}
+
+.dropdown-toggle{
+  transform: none;
 }
 
 .dropdown-menu.show {
@@ -199,6 +207,7 @@ header a:hover {
   white-space: nowrap;
   background-color: transparent;
   border: 0;
+  font-size: 25px;
 }
 
 .dropdown-item:hover {
@@ -220,6 +229,7 @@ header a:hover {
   background-color: transparent; 
   color: white;
   border: none;
+  font-size: 20px;
 }
 
 .btn-light:hover {
@@ -258,8 +268,18 @@ header a:hover {
   border: none;
 }
 
-.cart-btn:hover {
+svg {
+  vertical-align: middle;
+  width: 50px;
+  height: 25px;
+}
+
+svg:hover {
   transform: scale(1.05)
+}
+
+.cart-btn:hover {
+  transform: scale(1.07)
 }
 
 .cart {
@@ -580,6 +600,14 @@ form {
   color: black;
 }
 
+.product-page-col {
+  background-color: transparent;
+}
+
+.product-page-cards {
+  background-color: transparent;
+}
+
 .product-page-img {
   width: 100%;
   border-radius: 1000px;
@@ -596,6 +624,15 @@ form {
   padding: 1rem 1rem;
   margin-top: -20px;
   transform: none;
+}
+
+.order-history-container {
+  text-align: center;
+}
+
+.reviews-container-h2{
+  text-align: center;
+  justify-content: center;
 }
 
 /* .card {

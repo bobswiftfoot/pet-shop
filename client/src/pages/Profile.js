@@ -201,7 +201,7 @@ function Profile() {
                             </Row>
                         </Card>
                     </div>
-                    <div>
+                    <div className ='order-history-container'>
                         <h2>
                             Order History for {data.me.firstName} {data.me.lastName}
                         </h2>
@@ -227,9 +227,9 @@ function Profile() {
                             </div>
                         ))}
                     </div>
-                    <div>
-                        <h2>
-                            Reviews History for {data.me.firstName} {data.me.lastName}
+                    <div className ='reviews-container'>
+                        <h2 className='reviews-container-h2'>
+                            Reviews from {data.me.firstName} {data.me.lastName}
                         </h2>
                         {data.me.reviews.map((review) => (
                             <div key={review._id} className="my-2">

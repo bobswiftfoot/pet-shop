@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import pawprints from '../../assets/images/pawprints.jpg';
 import lizard from '../../assets/images/lizard.jpg';
+import { RiShoppingCart2Fill } from 'react-icons/ri';
+
 
 function Nav() {
 
@@ -38,7 +40,9 @@ function Nav() {
                 <Dropdown.Item href="/signup">Register</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Button href='/cart' className="d-inline cart-btn mx-2" variant="light">🛒</Button>
+            <Button href='/cart' className="d-inline cart-btn mx-2" variant="light">
+            <RiShoppingCart2Fill />
+            </Button>
           </div>
       );
     } else {
@@ -59,7 +63,9 @@ function Nav() {
                 <Dropdown.Item href="/signup">Register</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Button href='/cart' className="d-inline cart-btn mx-2" variant="light">🛒</Button>
+            <Button href='/cart' className="d-inline cart-btn mx-2" >
+            <RiShoppingCart2Fill />
+            </Button>
           </div>
         </>
 
