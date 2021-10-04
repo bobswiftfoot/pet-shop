@@ -36,7 +36,7 @@ db.once('open', async () =>
         { name: 'Exotic Toys' },
         { name: 'Exotic Supplies' }
     ]);
-    
+
     console.log("Subcategories created");
 
     await Category.insertMany([
@@ -84,7 +84,7 @@ db.once('open', async () =>
                 subcategories[18]._id,
                 subcategories[19]._id
             ]
-        }, 
+        },
         {
             name: 'Small Rodents',
             subcategories: [
@@ -117,7 +117,8 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[0]._id,
             price: 12.99,
-            featuredProduct: true
+            featuredProduct: true,
+            reviews: []
         },
         {
             name: 'Doggie Snax',
@@ -126,6 +127,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[1]._id,
             price: 2.99,
+            reviews: []
         },
         {
             name: 'Chew Bone',
@@ -134,6 +136,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[2]._id,
             price: 5.99,
+            reviews: []
         },
         {
             name: 'Dog Kennel',
@@ -142,7 +145,8 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[3]._id,
             price: 23.99,
-            featuredProduct: true
+            featuredProduct: true,
+            reviews: []
         },
         {
             name: 'Can of Tuna',
@@ -151,6 +155,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[4]._id,
             price: 7.99,
+            reviews: []
         },
         {
             name: 'Cat Nip',
@@ -159,6 +164,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[5]._id,
             price: 12.99,
+            reviews: []
         },
         {
             name: 'Fish on a pole',
@@ -167,7 +173,8 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[6]._id,
             price: 1.99,
-            featuredProduct: true
+            featuredProduct: true,
+            reviews: []
         },
         {
             name: 'Cat Tower',
@@ -176,6 +183,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[7]._id,
             price: 53.99,
+            reviews: []
         },
         {
             name: 'Fish Food',
@@ -184,6 +192,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[8]._id,
             price: 2.99,
+            reviews: []
         },
         {
             name: 'Fancy Fish Snacks',
@@ -192,7 +201,8 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[9]._id,
             price: 4.99,
-            featuredProduct: true
+            featuredProduct: true,
+            reviews: []
         },
         {
             name: 'Submarineer Statue',
@@ -201,6 +211,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[10]._id,
             price: 13.99,
+            reviews: []
         },
         {
             name: 'Fish Tank',
@@ -209,6 +220,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[11]._id,
             price: 102.99,
+            reviews: []
         },
         {
             name: 'Live Rats',
@@ -217,7 +229,8 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[12]._id,
             price: 50.99,
-            featuredProduct: true
+            featuredProduct: true,
+            reviews: []
         },
         {
             name: 'Lizzy Snax',
@@ -226,6 +239,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[13]._id,
             price: 5.99,
+            reviews: []
         },
         {
             name: 'Stuffed Lizard',
@@ -234,6 +248,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[14]._id,
             price: 2.99,
+            reviews: []
         },
         {
             name: 'Sun Lamp',
@@ -242,6 +257,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[15]._id,
             price: 32.99,
+            reviews: []
         },
         {
             name: 'Bird Seed',
@@ -250,7 +266,8 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[16]._id,
             price: 7.99,
-            featuredProduct: true
+            featuredProduct: true,
+            reviews: []
         },
         {
             name: 'Sunflower Seed',
@@ -259,6 +276,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[17]._id,
             price: 2.99,
+            reviews: []
         },
         {
             name: 'Swing',
@@ -267,6 +285,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[18]._id,
             price: 2.99,
+            reviews: []
         },
         {
             name: 'Birdcage',
@@ -275,7 +294,8 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[19]._id,
             price: 62.99,
-            featuredProduct: true
+            featuredProduct: true,
+            reviews: []
         },
         {
             name: 'Hampster Food',
@@ -284,6 +304,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[20]._id,
             price: 2.99,
+            reviews: []
         },
         {
             name: 'Gerbil Treats',
@@ -292,6 +313,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[21]._id,
             price: 2.99,
+            reviews: []
         },
         {
             name: 'Hampster Ball',
@@ -300,6 +322,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[22]._id,
             price: 12.99,
+            reviews: []
         },
         {
             name: 'Gerbil Cage',
@@ -308,7 +331,8 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[23]._id,
             price: 2.99,
-            featuredProduct: true
+            featuredProduct: true,
+            reviews: []
         },
         {
             name: 'Kangaroo Food',
@@ -317,6 +341,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[24]._id,
             price: 22.99,
+            reviews: []
         },
         {
             name: 'Sloth Treats',
@@ -325,6 +350,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[25]._id,
             price: 3.99,
+            reviews: []
         },
         {
             name: 'Ostrich Toys',
@@ -333,7 +359,8 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[26]._id,
             price: 5.99,
-            featuredProduct: true
+            featuredProduct: true,
+            reviews: []
         },
         {
             name: 'Giraffe Enclosure',
@@ -342,6 +369,7 @@ db.once('open', async () =>
             //image: 'dog-food.jpg',
             category: subcategories[27]._id,
             price: 1002.99,
+            reviews: []
         },
     ]);
 
@@ -349,49 +377,121 @@ db.once('open', async () =>
 
     await User.deleteMany();
 
-    await User.create({
-        firstName: 'Nathan',
-        lastName: 'Pfau',
-        userName: 'natepfau',
-        email: 'natepfau@yahoo.com',
-        password: 'password123',
-        orders: [
-            {
-                products: [products[0]._id, products[1]._id, products[2]._id]
-            }
-        ],
-        admin: true
-    });
-
-    await User.create({
-        firstName: 'Chris',
-        lastName: 'Rose',
-        userName: 'chrisrose',
-        email: 'blazer5@email.arizona.edu',
-        password: 'password123',
-        orders: [
-            {
-                products: [products[0]._id, products[1]._id, products[2]._id]
-            }
-        ],
-        admin: true
-    });
-
-    await User.create({
-        firstName: 'Alan',
-        lastName: 'Moreno',
-        userName: 'alanmoreno',
-        email: 'alg.moreno00@gmail.com',
-        password: 'password123',
-        orders: [
-            {
-                products: [products[0]._id, products[1]._id, products[2]._id]
-            }
-        ],
-        admin: true
-    });
+    const users = await User.insertMany([
+        {
+            firstName: 'Nathan',
+            lastName: 'Pfau',
+            userName: 'natepfau',
+            email: 'natepfau@yahoo.com',
+            password: 'password123',
+            orders: [
+                {
+                    products: [products[0]._id, products[1]._id, products[2]._id]
+                }
+            ],
+            admin: true
+        },
+        {
+            firstName: 'Chris',
+            lastName: 'Rose',
+            userName: 'chrisrose',
+            email: 'blazer5@email.arizona.edu',
+            password: 'password123',
+            orders: [
+                {
+                    products: [products[0]._id, products[1]._id, products[2]._id]
+                }
+            ],
+            admin: true
+        },
+        {
+            firstName: 'Alan',
+            lastName: 'Moreno',
+            userName: 'alanmoreno',
+            email: 'alg.moreno00@gmail.com',
+            password: 'password123',
+            orders: [
+                {
+                    products: [products[0]._id, products[1]._id, products[2]._id]
+                }
+            ],
+            admin: true
+        }
+    ]);
 
     console.log('Users seeded');
+
+    await Review.deleteMany();
+
+    let review = await Review.create(
+        {
+            reviewText: 'This is the best food I have ever tasted',
+            rating: 4,
+            user: users[0]._id,
+            product: products[0]._id
+        });
+
+    let user = await User.findOneAndUpdate(
+        { _id: users[0]._id },
+        { $push: { reviews: review._id } },
+        { new: true });
+
+    let product = await Product.findOneAndUpdate(
+        { _id: products[0]._id },
+        { $push: { reviews: review._id } },
+        { new: true });
+
+    review = await Review.create(
+        {
+            reviewText: 'This is the best food I have ever tasted again',
+            rating: 5,
+            user: users[0]._id,
+            product: products[0]._id
+        });
+
+    user = await User.findOneAndUpdate(
+        { _id: users[0]._id },
+        { $push: { reviews: review._id } },
+        { new: true });
+
+    product = await Product.findOneAndUpdate(
+        { _id: products[0]._id },
+        { $push: { reviews: review._id } },
+        { new: true });
+
+    review = await Review.create(
+        {
+            reviewText: 'Very Roomy',
+            rating: 3,
+            user: users[1]._id,
+            product: products[27]._id
+        });
+
+    await User.findOneAndUpdate(
+        { _id: users[1]._id },
+        { $push: { reviews: review._id } });
+
+    await Product.findOneAndUpdate(
+        { _id: products[27]._id },
+        { $push: { reviews: review._id } });
+
+    review = await Review.create(
+        {
+            reviewText: 'Not a real fish',
+            rating: 1,
+            user: users[2]._id,
+            product: products[6]._id
+        });
+
+    await User.findOneAndUpdate(
+        { _id: users[2]._id },
+        { $push: { reviews: review._id } });
+
+    await Product.findOneAndUpdate(
+        { _id: products[6]._id },
+        { $push: { reviews: review._id } });
+
+    console.log('Reviews seeded');
 
     process.exit();
 });

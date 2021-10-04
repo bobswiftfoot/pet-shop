@@ -66,6 +66,22 @@ export const QUERY_ALL_CATEGORIES = gql`
     }
 `;
 
+export const QUERY_TOPCATEGORIES = gql`
+    query topCategories 
+    {
+        topCategories 
+        {
+            _id
+            name
+            subcategories 
+            {
+                _id
+                name
+            }
+        }
+    }
+`;
+
 export const QUERY_SUBCATEGORIES = gql`
     query subcategories($id: ID!) 
     {
@@ -91,11 +107,11 @@ export const QUERY_ALL_PRODUCTS = gql`
                 _id
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName
@@ -118,11 +134,11 @@ export const QUERY_ALL_PRODUCTS_BY_CATEGORY = gql`
             {
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName
@@ -145,11 +161,11 @@ export const QUERY_PRODUCT = gql`
             {
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName
@@ -172,11 +188,11 @@ export const QUERY_FEATURED_PRODUCTS = gql`
             {
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName
@@ -282,6 +298,7 @@ export const QUERY_ME = gql`
                 name
             }
         }
+        admin
     }
   }
 `;
