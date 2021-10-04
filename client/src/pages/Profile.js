@@ -183,12 +183,12 @@ function Profile() {
                         <Link to="/">← Back to Home</Link>
                     </div>
                     <div className="container-fluid">
-                        <Card className="mb-3 mx-auto">
+                        <Card className="mb-3 mx-auto profile-card">
                             <Row className="g-0">
                                 <div>
                                     {console.log(data)}
                                     <Card.Title><h1>{`${data.me.firstName} ${data.me.lastName}`}</h1></Card.Title>
-                                    <Card.Body>
+                                    <Card.Body className='profile-card-body'>
                                         <h3 className="pb-1">Username: {`${data.me.userName}`}</h3>
                                         <h3 className="pb-1">Email: {`${data.me.email}`}</h3><br />
                                         <Button className="btn btn-dark" onClick={() => setModalShow(true)}>Edit Profile</Button>

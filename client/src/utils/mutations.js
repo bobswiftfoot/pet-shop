@@ -114,9 +114,15 @@ export const ADD_PRODUCT = gql`
 `;
 
 export const EDIT_PRODUCT = gql`
+<<<<<<< HEAD
   mutation editProduct($editProductId: ID!, $editProductName: String, $editProductDescription: String, $editProductImage: String, $editProductPrice: Float, $editProductCategory: ID, $editProductFeaturedProduct: Boolean) 
   {
     editProduct(_id: $editProductId, name: $editProductName, description: $editProductDescription, image: $editProductImage, price: $editProductPrice, category: $editProductCategory, featuredProduct: $editProductFeaturedProduct) 
+=======
+  mutation editProduct($editProductId: ID!, $editProductName: String, $editProductDescription: String, $editProductImage: String, $editProductPrice: Float, $editProductCategory: ID, $editProductFeaturedProduct: Boolean, $editProductRating: Float) 
+  {
+    editProduct(_id: $editProductId, name: $editProductName, description: $editProductDescription, image: $editProductImage, price: $editProductPrice, category: $editProductCategory, featuredProduct: $editProductFeaturedProduct, rating: $editProductRating) 
+>>>>>>> alan
     {
       _id
       name

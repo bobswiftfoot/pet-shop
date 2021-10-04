@@ -6,6 +6,8 @@ import {
   REMOVE_FROM_CART,
   ADD_MULTIPLE_TO_CART,
   UPDATE_CATEGORIES,
+  UPDATE_TOPCATEGORIES,
+  UPDATE_SUBCATEGORIES,
   UPDATE_CURRENT_CATEGORY,
   CLEAR_CART,
   TOGGLE_CART
@@ -72,6 +74,18 @@ export const reducer = (state, action) => {
       return {
         ...state,
         categories: [...action.categories],
+      };
+
+      case UPDATE_TOPCATEGORIES:
+      return {
+        ...state,
+        topCategories: [...action.topCategories],
+      };
+
+      case UPDATE_SUBCATEGORIES:
+      return {
+        ...state,
+        subCategories: [...action.subCategories],
       };
 
     case UPDATE_CURRENT_CATEGORY:
