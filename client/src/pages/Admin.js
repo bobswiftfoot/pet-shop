@@ -20,10 +20,13 @@ const Admin = () =>
     const { loading: loadingUser, data: currentUserData } = useQuery(QUERY_ME);
 
     if(loadingUser)
-        return (<div>Loading...</div>)
+        return (<div>Loading...</div>);
 
-    if(!currentUserData.me.admin)
+    if(!currentUserData?.me.admin)
+    {
         window.location.assign('/');
+        return (<div>Loading...</div>);
+    }
 
     return (
         <div>
