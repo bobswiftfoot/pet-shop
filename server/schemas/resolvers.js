@@ -28,6 +28,17 @@ const resolvers =
         categories: async () => {
             return await Category.find().populate("subcategories");
         },
+        topCategories: async (parent, { _id }) => 
+        {
+            const categories =  await Category.find().populate("subcategories");
+            const topCategories = [];
+            for(let i = 0; i < categories.length; i++)
+            {
+                if(categories[i].subcategories.length > 0)
+                    topCategories.push(categories[i]);
+            }
+            return topCategories;
+        },
         subcategories: async (parent, { _id }) => 
         {
             const parentCategory = await Category.findById(_id).populate("subcategories");
@@ -156,7 +167,7 @@ const resolvers =
             throw new AuthenticationError('Not logged in');
         },
         editCategory: async (parent, args) => {
-            const category = await Category.findOneAndUpdate(args._id, args);
+            const category = await Category.findOneAndUpdate({_id: args._id}, { name: args.name, subcategories: args.subcategories});
             return category;
         },
         removeCategory: async (parent, { _id }) => {
@@ -168,7 +179,9 @@ const resolvers =
             return product;
         },
         editProduct: async (parent, args) => {
-            const product = await Product.findOneAndUpdate(args._id, args);
+            console.log(args);
+            const product = await Product.findOneAndUpdate({_id: args._id}, { name: args.name, description: args.description, image: args.image, price: args.price, category: args.category, featuredProduct: args.featuredProduct});
+            console.log(product);
             return product;
         },
         removeProduct: async (parent, { _id }) => {

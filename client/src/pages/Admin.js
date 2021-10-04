@@ -1,12 +1,9 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
-import ListGroup from 'react-bootstrap/ListGroup';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
-import Form from 'react-bootstrap/Form';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
+import { ListGroup, InputGroup, Tabs, Tab} from 'react-bootstrap';
 import { QUERY_ALL_CATEGORIES, QUERY_ALL_PRODUCTS, QUERY_ALL_USERS, QUERY_ALL_REVIEWS } from '../utils/queries';
+import AdminCategory from '../components/AdminCategory';
+import AdminProduct from '../components/AdminProduct';
 
 const Admin = () =>
 {
@@ -20,72 +17,12 @@ const Admin = () =>
             <Tabs defaultActiveKey="categories">
                 <Tab eventKey="categories" title="Categories">
                     {!loadingCategories ? (
-                        <ListGroup>
-                            {categoryData.categories.map((category) => (
-                                <ListGroup.Item key={category._id}>
-                                    <InputGroup>
-                                        <InputGroup.Text>Name:</InputGroup.Text>
-                                        <FormControl type="text" placeholder="Name" defaultValue={category.name}></FormControl>
-                                    </InputGroup>
-                                    {(category.subcategories.length > 0) ?
-                                        <InputGroup>
-                                            <InputGroup.Text>Subcategories:</InputGroup.Text>
-                                            {category.subcategories.map((subcategory) => (
-                                                <Form.Select key={subcategory._id}>
-                                                    {categoryData.categories.map(listCategory => (
-                                                        listCategory._id === subcategory._id) ?
-                                                        <option key={listCategory._id} id={listCategory._id} selected>{listCategory.name}</option> :
-                                                        <option key={listCategory._id} id={listCategory._id}>{listCategory.name}</option>
-                                                    )}
-                                                </Form.Select>
-                                            ))}
-                                        </InputGroup>
-                                        : null}
-                                </ListGroup.Item>
-                            ))}
-                        </ListGroup>
+                        <AdminCategory categoryData={categoryData}/>
                     ) : null}
                 </Tab>
                 <Tab eventKey="products" title="Products">
-                    {!loadingProducts ? (
-                        <ListGroup>
-                            {productData.products.map((product) => (
-                                <ListGroup.Item key={product._id}>
-                                    <InputGroup>
-                                        <InputGroup.Text>Name:</InputGroup.Text>
-                                        <FormControl type="text" placeholder="Name" defaultValue={product.name}></FormControl>
-                                    </InputGroup>
-                                    <InputGroup>
-                                        <InputGroup.Text>Description:</InputGroup.Text>
-                                        <FormControl type="text" placeholder="Description" defaultValue={product.description}></FormControl>
-                                    </InputGroup>
-                                    <InputGroup>
-                                        <InputGroup.Text>Image:</InputGroup.Text>
-                                        {/* TODO: Change this to a drop down containing all image chioces*/}
-                                        <FormControl type="text" placeholder="Image" defaultValue={product.image}></FormControl>
-                                    </InputGroup>
-                                    <InputGroup>
-                                        <InputGroup.Text>Price:</InputGroup.Text>
-                                        <FormControl type="text" placeholder="Price" defaultValue={product.price}></FormControl>
-                                    </InputGroup>
-                                    <InputGroup>
-                                        <InputGroup.Text>Category:</InputGroup.Text>
-                                        <Form.Select key={product.category._id}>
-                                            {categoryData.categories.map(listCategory => (
-                                                listCategory._id === product.category._id) ?
-                                                <option key={listCategory._id} id={listCategory._id} selected>{listCategory.name}</option> :
-                                                <option key={listCategory._id} id={listCategory._id}>{listCategory.name}</option>
-                                            )}
-                                        </Form.Select>
-                                    </InputGroup>
-                                    <InputGroup>
-                                        <InputGroup.Text>Featured:</InputGroup.Text>
-                                        {/* Using createElement to make use of defaultChecked */}
-                                        {React.createElement('input',{type: 'checkbox', defaultChecked: product.featuredProduct})}
-                                    </InputGroup>
-                                </ListGroup.Item>
-                            ))}
-                        </ListGroup>
+                    {!loadingProducts && !loadingCategories ? (
+                        <AdminProduct categoryData={categoryData} productData={productData}/>
                     ) : null}
                 </Tab>
                 <Tab eventKey="users" title="Users">
@@ -124,7 +61,6 @@ const Admin = () =>
                             <ListGroup>
                                 {reviewData.reviews.map((review) => (
                                     <ListGroup.Item key={review._id}>
-                                        {console.log(review)}
                                         <InputGroup>
                                             <InputGroup.Text>Text:</InputGroup.Text>
                                             <InputGroup.Text>{review.reviewText}</InputGroup.Text>
