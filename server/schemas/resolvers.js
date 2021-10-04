@@ -232,8 +232,19 @@ const resolvers =
             console.log(product);
             return product;
         },
-        removeProduct: async (parent, { _id }) => {
-            const product = await Product.findOneAndDelete({_id: _id});
+        removeProduct: async (parent, {_id}) => {
+            const product = await Product.findOneAndDelete({ _id: _id}, {new: true})
+                .populate("reviews");
+            
+            //Go through all reviews and remove what we're deleting
+            for(let i = 0; i < product.reviews.length; i++)
+            {
+                const review = await Review.findOneAndRemove(product.reviews[0]._id);
+
+                await User.findOneAndUpdate(
+                    { _id: review.user },
+                    { $pull: { reviews: product.reviews[0]._id } });
+            }
             return product;
         },
         addReview: async (parent, args) => {
