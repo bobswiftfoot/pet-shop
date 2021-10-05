@@ -10,9 +10,11 @@ import Auth from '../utils/auth';
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
+import Col from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import dogfood from '../assets/images/dogfood.jpg';
 
 //Modal
 function MyVerticallyCenteredModal(props) {
@@ -20,8 +22,6 @@ function MyVerticallyCenteredModal(props) {
     const [editUser] = useMutation(EDIT_USER);
 
     const { loading, data } = useQuery(QUERY_ME);
-
-    // const user = data?.me || data?.user || {};
 
     const handleEditSubmit = async (event) => {
         event.preventDefault();
@@ -53,25 +53,6 @@ function MyVerticallyCenteredModal(props) {
         Auth.login(token);
         window.location.assign('/profile');
     };
-
-    // const [editUser, { error }] = useMutation(EDIT_USER);
-
-    // const handleEditSubmit = async (event) =>
-    // {
-    //     const { value, id } = event.target.parentNode.children[0].children[1];
-    //     try
-    //     {
-    //         await editUser({ variables: { editUserId: id, editUserFirstName: value, 
-    //             editUserLastName: value,
-    //             editUserUserName: value,
-    //             editUserEmail: value,
-    //             editUserPassword: value } });
-    //     }
-    //     catch (e)   
-    //     {
-    //         console.log(e);
-    //     }
-    // };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -176,11 +157,13 @@ function Profile() {
 
     return (
         <>
-            {console.log(data)}
             {!loading ? (
                 <>
                     <div className="container my-1">
                         <Link to="/">← Back to Home</Link>
+                    </div>                    
+                    <div className="container my-1">
+                        {data.me.admin ? <Link to="/admin">Admin Panel</Link>: null}
                     </div>
                     <div className="container-fluid">
                         <Card className="mb-3 mx-auto profile-card">
@@ -206,51 +189,47 @@ function Profile() {
                             Order History for {data.me.firstName} {data.me.lastName}
                         </h2>
                         {data.me.orders.map((order) => (
-                            <div key={order._id} className="my-2">
-                                {console.log(order)}
-                                <h3>
-                                    {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
-                                </h3>
-                                <div className="flex-row">
-                                    {order.products.map(({ _id, name }, index) => (
-                                        <div key={index} className="card px-1 py-1">
-                                            <Link to={`/products/${_id}`}>
-                                                {/* <img alt={name} src={`/images/${image}`} /> */}
-                                                <p>{name}</p>
+                            <Container fluid>
+                                <Row>
+                                    <Row>
+                                        <h3>
+                                            {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
+                                        </h3>
+                                    </Row>
+                                    <Row>
+                                    {order.products.map((product, index) => (
+                                        <Col key={index} id="profile-product-col">
+                                            <Link to={`/products/${product._id}`}  id="profile-product-link">
+                                                <p>{product.name}</p>
+                                                <img alt={product.name} src={(product.image) ? `/images/${product.image}` : dogfood} />
+                                                <span>${product.price}</span>
                                             </Link>
-                                            {/* <div>
-                                                <span>${price}</span>
-                                            </div> */}
-                                        </div>
+                                        </Col>
                                     ))}
-                                </div>
-                            </div>
+                                    </Row>
+                                </Row>
+                            </Container>
                         ))}
                     </div>
                     <div className ='reviews-container'>
                         <h2 className='reviews-container-h2'>
                             Reviews from {data.me.firstName} {data.me.lastName}
                         </h2>
-                        {data.me.reviews.map((review) => (
-                            <div key={review._id} className="my-2">
-                                {/* <h3>
-                                    {new Date(parseInt(review.purchaseDate)).toLocaleDateString()}
-                                </h3>
-                                 <div className="flex-row">
-                                    {reviews.reviewText.map((index) => (
-                                        <div key={index} className="card px-1 py-1">
-                                            <Link to={`/products/${_id}`}>
-                                                <img alt={name} src={`/images/${image}`} />
-                                                <p>{reviewText}</p>
-                                            </Link>
-                                            <div>
-                                                <span>${price}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div> */}
-                            </div>
-                        ))}
+                        <Container fluid>
+                            <Row>
+                            {data.me.reviews.map((review, index) => (
+                                <Col key={index}  id="profile-product-col">
+                                    <Link to={`/products/${review.product._id}`}  id="profile-product-link">
+                                        <h3>{review.product.name}</h3>
+                                        <img alt={review.product.name} src={(review.product.image) ? `/images/${review.product.image}` : dogfood} />
+                                        <p>{review.reviewText}</p>
+                                        <p>Rating: {review.rating}</p>
+                                    </Link>
+
+                                </Col>
+                            ))}
+                            </Row>
+                        </Container>
                     </div>
                 </>
             ) : null}

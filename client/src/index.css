@@ -748,3 +748,13 @@ input:focus {
     width: 100%;
   }
 }
+
+#profile-product-col
+{
+  width: auto;
+}
+
+#profile-product-link
+{
+  width: 100%;
+}

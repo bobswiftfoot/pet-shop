@@ -13,7 +13,7 @@ const resolvers =
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
                     .populate({ path: "reviews", populate: "product" })
-                    .populate({ path: "orders", populate: "product" })
+                    .populate({ path: "orders", populate: "products" })
                 return userData;
             }
 

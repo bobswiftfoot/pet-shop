@@ -286,6 +286,8 @@ export const QUERY_ME = gql`
             {
                 _id 
                 name
+                price
+                image
             }
         }
         reviews 
@@ -295,7 +297,9 @@ export const QUERY_ME = gql`
             rating
             product 
             {
+                _id
                 name
+                image
             }
         }
         admin
