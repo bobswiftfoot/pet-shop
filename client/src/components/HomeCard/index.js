@@ -42,6 +42,7 @@ function HomeCard() {
     <Carousel className="carousel">
       {filterProducts().map((product) => (
         <Carousel.Item className="carousel-item" key={product._id} interval={4000000}>
+          {console.log(product)}
           <ProductItem
             key={product._id}
             _id={product._id}

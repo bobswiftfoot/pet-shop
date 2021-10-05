@@ -12,9 +12,9 @@ import { ADD_REVIEW } from '../utils/mutations';
 import { idbPromise } from '../utils/helpers';
 import spinner from '../assets/spinner.gif';
 import { Modal, Button, ListGroup, Form, Row, Col } from 'react-bootstrap';
-import dogfood from '../assets/images/dogfood.jpg';
 import Auth from '../utils/auth'
 import { calculateRating } from '../utils/helpers'
+import { getImage } from '../utils/images'
 
 function Detail() {
   const [state, dispatch] = useStoreContext();
@@ -115,7 +115,8 @@ function Detail() {
             </Modal>
           </p>
           <img
-            src={dogfood}
+            className="detail-page-img"
+            src={getImage(currentProduct.image)}
             alt={currentProduct.name}
           />
             <ListGroup>

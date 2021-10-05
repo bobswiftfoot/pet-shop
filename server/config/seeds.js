@@ -114,7 +114,7 @@ db.once('open', async () =>
             name: 'Bag of Dog Food',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'dogfood.jpg',
             category: subcategories[0]._id,
             price: 12.99,
             featuredProduct: true,
@@ -124,16 +124,16 @@ db.once('open', async () =>
             name: 'Doggie Snax',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'dogtreats.jpg',
             category: subcategories[1]._id,
             price: 2.99,
             reviews: []
         },
         {
-            name: 'Chew Bone',
+            name: "Tug o' War Rope",
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'dogtoy.jpg',
             category: subcategories[2]._id,
             price: 5.99,
             reviews: []
@@ -142,7 +142,7 @@ db.once('open', async () =>
             name: 'Dog Kennel',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'dogkennel.jpg',
             category: subcategories[3]._id,
             price: 23.99,
             featuredProduct: true,
@@ -152,16 +152,16 @@ db.once('open', async () =>
             name: 'Can of Tuna',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'catfood.jpg',
             category: subcategories[4]._id,
             price: 7.99,
             reviews: []
         },
         {
-            name: 'Cat Nip',
+            name: 'Party Mix',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'cattreats.jpg',
             category: subcategories[5]._id,
             price: 12.99,
             reviews: []
@@ -170,7 +170,7 @@ db.once('open', async () =>
             name: 'Fish on a pole',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'cattoy.jpg',
             category: subcategories[6]._id,
             price: 1.99,
             featuredProduct: true,
@@ -180,25 +180,25 @@ db.once('open', async () =>
             name: 'Cat Tower',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'cattower.jpg',
             category: subcategories[7]._id,
             price: 53.99,
             reviews: []
         },
         {
-            name: 'Fish Food',
+            name: 'Tropical Fish Food',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'fishfood.jpg',
             category: subcategories[8]._id,
             price: 2.99,
             reviews: []
         },
         {
-            name: 'Fancy Fish Snacks',
+            name: 'Betta Fish Pellets',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'fishtreats.jpg',
             category: subcategories[9]._id,
             price: 4.99,
             featuredProduct: true,
@@ -208,7 +208,7 @@ db.once('open', async () =>
             name: 'Submarineer Statue',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'fishtoy.jpg',
             category: subcategories[10]._id,
             price: 13.99,
             reviews: []
@@ -217,72 +217,81 @@ db.once('open', async () =>
             name: 'Fish Tank',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'fishtank.jpg',
             category: subcategories[11]._id,
             price: 102.99,
             reviews: []
         },
         {
-            name: 'Live Rats',
+            name: 'Fish Aquarium',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'fishaquarium.jpg',
+            category: subcategories[11]._id,
+            price: 75.99,
+            reviews: []
+        },
+        {
+            name: 'Omnivore Mix',
+            description:
+                'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+            image: 'reptilefood.jpg',
             category: subcategories[12]._id,
             price: 50.99,
             featuredProduct: true,
             reviews: []
         },
         {
-            name: 'Lizzy Snax',
+            name: 'Herptivite Multivitamins',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'reptiletreats.jpg',
             category: subcategories[13]._id,
             price: 5.99,
             reviews: []
         },
         {
-            name: 'Stuffed Lizard',
+            name: 'Hideaway Rock',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'reptilehideaway.jpg',
             category: subcategories[14]._id,
             price: 2.99,
             reviews: []
         },
         {
-            name: 'Sun Lamp',
+            name: 'Heating Pad',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'reptileheatingpad.jpg',
             category: subcategories[15]._id,
             price: 32.99,
             reviews: []
         },
         {
-            name: 'Bird Seed',
+            name: 'Wild Bird Seed',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'birdfood.jpg',
             category: subcategories[16]._id,
             price: 7.99,
             featuredProduct: true,
             reviews: []
         },
         {
-            name: 'Sunflower Seed',
+            name: 'Treat Sticks',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'birdtreats.jpg',
             category: subcategories[17]._id,
             price: 2.99,
             reviews: []
         },
         {
-            name: 'Swing',
+            name: 'Swings',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'birdtoys.jpg',
             category: subcategories[18]._id,
             price: 2.99,
             reviews: []
@@ -291,7 +300,7 @@ db.once('open', async () =>
             name: 'Birdcage',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'birdcage.jpg',
             category: subcategories[19]._id,
             price: 62.99,
             featuredProduct: true,
@@ -301,16 +310,16 @@ db.once('open', async () =>
             name: 'Hampster Food',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'rodentfood.jpg',
             category: subcategories[20]._id,
             price: 2.99,
             reviews: []
         },
         {
-            name: 'Gerbil Treats',
+            name: 'Nibble Rings',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'rodenttreats.jpg',
             category: subcategories[21]._id,
             price: 2.99,
             reviews: []
@@ -319,16 +328,16 @@ db.once('open', async () =>
             name: 'Hampster Ball',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'hampsterball.jpg',
             category: subcategories[22]._id,
             price: 12.99,
             reviews: []
         },
         {
-            name: 'Gerbil Cage',
+            name: 'Hampster Wheel',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'hampsterwheel.jpg',
             category: subcategories[23]._id,
             price: 2.99,
             featuredProduct: true,
@@ -338,25 +347,25 @@ db.once('open', async () =>
             name: 'Kangaroo Food',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'kangaroofood.jpg',
             category: subcategories[24]._id,
             price: 22.99,
             reviews: []
         },
         {
-            name: 'Sloth Treats',
+            name: 'Axolotl Treats',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'axolotltreats.jpg',
             category: subcategories[25]._id,
             price: 3.99,
             reviews: []
         },
         {
-            name: 'Ostrich Toys',
+            name: 'Elephant Ring Toss',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'elephantringtoss.jpg',
             category: subcategories[26]._id,
             price: 5.99,
             featuredProduct: true,
@@ -366,7 +375,7 @@ db.once('open', async () =>
             name: 'Giraffe Enclosure',
             description:
                 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-            //image: 'dog-food.jpg',
+            image: 'giraffeenclosure.jpg',
             category: subcategories[27]._id,
             price: 1002.99,
             reviews: []

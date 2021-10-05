@@ -14,7 +14,7 @@ import Col from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import dogfood from '../assets/images/dogfood.jpg';
+import { getImage } from '../utils/images';
 
 //Modal
 function MyVerticallyCenteredModal(props) {
@@ -204,7 +204,7 @@ function Profile() {
                                         <Col key={index} id="profile-product-col">
                                             <Link to={`/products/${product._id}`}  id="profile-product-link">
                                                 <p>{product.name}</p>
-                                                <img alt={product.name} src={(product.image) ? `/images/${product.image}` : dogfood} />
+                                                <img className='profile-page-img' alt={product.name} src={getImage(product.image)} />
                                                 <span>${product.price}</span>
                                             </Link>
                                         </Col>
@@ -224,7 +224,7 @@ function Profile() {
                                 <Col key={index}  id="profile-product-col">
                                     <Link to={`/products/${review.product._id}`}  id="profile-product-link">
                                         <h3>{review.product.name}</h3>
-                                        <img alt={review.product.name} src={(review.product.image) ? `/images/${review.product.image}` : dogfood} />
+                                        <img className='profile-page-img' alt={review.product.name} src={getImage(review.product.image)} />
                                         <p>{review.reviewText}</p>
                                         <p>Rating: {review.rating}</p>
                                     </Link>

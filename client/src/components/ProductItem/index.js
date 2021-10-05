@@ -15,16 +15,16 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import dogfood from '../../assets/images/dogfood.jpg';
+import { getImage } from '../../utils/images';
 
 function ProductItem(item) {
   const [state, dispatch] = useStoreContext();
   const {
     name,
     _id,
+    image,
     price,
   } = item;
-
 
   const [currentProduct, setCurrentProduct] = useState({});
 
@@ -93,7 +93,7 @@ function ProductItem(item) {
         <Card className='product-page-cards mt-5'>
           <Card.Body>
             <Link to={`/products/${_id}`} className='product-link'>
-              <Card.Img className='product-page-img' variant="top" src={dogfood} />
+              <Card.Img className='product-page-img' variant="top" src={getImage(image)} />
             </Link>
             <Link to={`/products/${_id}`} className='product-link'>
               <Card.Title className='product-card-h2'>{name}</Card.Title>
