@@ -138,7 +138,8 @@ const resolvers =
     {
         addUser: async (parent, args) => {
             const user = await User.create(args);
-            return user;
+            const token = signToken(user);
+            return { token, user };
         },
         removeUser: async (parent, {_id}) => {
             const user = await User.findOneAndDelete({ _id: _id}, {new: true})

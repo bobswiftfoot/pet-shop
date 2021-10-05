@@ -11,7 +11,6 @@ function Signup(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("pre-reg");
 
     const mutationResponse = await addUser({
       variables: {
@@ -23,10 +22,6 @@ function Signup(props) {
       },
     });
 
-    console.log("post-reg");
-
-    console.log(mutationResponse.data.addUser.user);
-    console.log(mutationResponse.data.addUser.token);
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
     window.location.assign('/');

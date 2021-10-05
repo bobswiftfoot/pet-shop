@@ -64,7 +64,6 @@ function MyVerticallyCenteredModal(props) {
 
     return (
         <>
-            {console.log(data)}
             {!loading ? (
                 <Modal
                     {...props}
@@ -155,6 +154,11 @@ function Profile() {
     //for Modal
     const [modalShow, setModalShow] = useState(false);
 
+    if(!loading && !data)
+    {
+        window.location.assign("/");
+    }
+
     return (
         <>
             {!loading ? (
@@ -169,7 +173,6 @@ function Profile() {
                         <Card className="mb-3 mx-auto profile-card">
                             <Row className="g-0">
                                 <div>
-                                    {console.log(data)}
                                     <Card.Title><h1>{`${data.me.firstName} ${data.me.lastName}`}</h1></Card.Title>
                                     <Card.Body className='profile-card-body'>
                                         <h3 className="pb-1">Username: {`${data.me.userName}`}</h3>
@@ -188,8 +191,8 @@ function Profile() {
                         <h2>
                             Order History for {data.me.firstName} {data.me.lastName}
                         </h2>
-                        {data.me.orders.map((order) => (
-                            <Container fluid>
+                        {data.me.orders.map((order, index) => (
+                            <Container fluid key={`Order${index}`}>
                                 <Row>
                                     <Row>
                                         <h3>
