@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom'
 import { useMutation } from '@apollo/client';
 import { ListGroup, InputGroup, FormControl, Form, Button, Container, Row, Col} from 'react-bootstrap';
-import { EDIT_CATEGORY, REMOVE_CATEGORY } from '../../utils/mutations';
+import { EDIT_CATEGORY, REMOVE_CATEGORY, ADD_CATEGORY } from '../../utils/mutations';
 
 const SubcategoryFormSelect = (props) =>
 {
@@ -52,21 +52,19 @@ const AdminCategory = (props) =>
 {
     const [editCategory] = useMutation(EDIT_CATEGORY);
     const [removeCategory] = useMutation(REMOVE_CATEGORY);
+    const [addCategory] = useMutation(ADD_CATEGORY);
 
     const handleSaveCategory = async (event) =>
     {
         const { value, id } = event.target.parentNode.children[0].children[0].children[1].children[0];
-        const subCategoryElements = event.target.parentNode.children[1].children[0].children[1].children;
-        console.log(event)
-        console.log(subCategoryElements)
+        const subCategoryElements = event.target.parentNode.querySelector("#SubcategoryGroup").children[1].children;
         let subcategories = new Set();
-        if(subCategoryElements.length > 1)
+        if(subCategoryElements.length > 0)
         {
             for(let i = 0; i < subCategoryElements.length; i++)
             {
-                console.log(subCategoryElements[i].children[0].children[0])
                 if(subCategoryElements[i].children[0].children[0].children[0].selectedOptions)
-                    subcategories.add(subCategoryElements[i].children[0].children[0].children[0].selectedOptions[0].id);
+                    subcategories.add(subCategoryElements[i].children[0].children[0].children[0].selectedOptions[0].value);
             }
         }
         try
@@ -103,10 +101,30 @@ const AdminCategory = (props) =>
         });
         ReactDOM.render(<SubcategoryFormSelect category={parentNode.id} categories={props.categoryData.categories} subCategories={subcategories}/>, container);
     };    
+    const handleAddCategory = async (event) =>
+    {
+        const addName = document.getElementById("AddCategoryButton").value;
+        if(!addName)
+            return;
+        await addCategory({ variables: {addCategoryName: addName } });
+        window.location.reload();
+    }
 
     return (
         <Container fluid>
             <ListGroup>
+                <ListGroup.Item key="AddButton" className="mb-1 border-3">
+                    <Row className="mb-1">
+                        <InputGroup>
+                            <Col sm={2} className="me-1 p-0">
+                                <Button type="submit" onClick={handleAddCategory} className="me-1">Add Category</Button>
+                            </Col>
+                            <Col sm={8}>
+                                <FormControl className="m-0" type="text" placeholder="Name" name="name" id="AddCategoryButton"></FormControl>
+                            </Col>
+                        </InputGroup>
+                    </Row>
+                </ListGroup.Item>
                 {props.categoryData.categories.map((category) => (
                     <ListGroup.Item key={category._id} className="mb-1 border-3">
                         <Row className="mb-1">
@@ -120,7 +138,7 @@ const AdminCategory = (props) =>
                             </InputGroup>
                         </Row>
                         <Row className="mb-1">
-                            <InputGroup >
+                            <InputGroup id="SubcategoryGroup">
                                 <Col sm={2} className="me-1">
                                     <InputGroup.Text >Subcategories:</InputGroup.Text>
                                 </Col>
