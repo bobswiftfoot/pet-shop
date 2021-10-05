@@ -16,14 +16,7 @@ function Nav() {
             <Button className="d-inline col-2 products-btn mx-2" href='/products' variant="light">All Products</Button>
           </Dropdown>
           <Dropdown className="d-inline mx-1" >
-            <Dropdown.Toggle className='dropdown' id="dropdown-autoclose-true">
-              User
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-              <Dropdown.Item href="/admin">Admin Page</Dropdown.Item>
-            </Dropdown.Menu>
+            <Button className="d-inline col-2 products-btn mx-2" href='/profile' variant="light">Profile</Button>
           </Dropdown>
 
           <Dropdown className="col-2 mx-1 d-inline">
@@ -32,9 +25,7 @@ function Nav() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="/login">Login</Dropdown.Item>
               <Dropdown.Item href="/" onClick={() => Auth.logout()}>Log Out</Dropdown.Item>
-              <Dropdown.Item href="/signup">Register</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Button href='/cart' className="d-inline mx-1 col-2 cart-btn " variant="light">
