@@ -527,6 +527,12 @@ form {
   margin-top: 130px;
 }
 
+.review-form {
+  width: 100%;
+  justify-content: center;
+  margin: auto;
+}
+
 .login-signup-form {
   justify-content: center;
 }

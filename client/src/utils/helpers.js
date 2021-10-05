@@ -60,12 +60,12 @@ export function calculateRating(reviews)
 {
   const count = reviews.length;
   if (count === 0)
-    return 0;
+    return "No Reviews";
 
   let sum = 0;
   reviews.forEach(review =>
   {
     sum += review.rating;
   });
-  return parseFloat(sum / count);
+  return parseFloat(sum / count) + "/5";
 };
