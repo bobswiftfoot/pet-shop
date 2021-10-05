@@ -10,6 +10,7 @@ import { idbPromise } from '../../utils/helpers';
 import { Dropdown, DropdownButton, Navbar, Button } from 'react-bootstrap';
 
 function CategoryMenu() {
+
   const [state, dispatch] = useStoreContext();
 
   const { topCategories } = state;
@@ -50,21 +51,19 @@ function CategoryMenu() {
 
   return (
     <Navbar>
-      <h2> Choose a Category: </h2>
         <Button onClick={() => { handleClick(null);}} > All </Button>
         {topCategoryData.topCategories.map((category) => (
         <DropdownButton key={category._id}
                         title={category.name}
                         className="m-1">
           {category.subcategories.map((subCategory) => (
-            <Dropdown.Item  
-                          as='button'
-                            key={subCategory._id}
-                            onClick={() => {
-                            handleClick(subCategory._id);}}  
-                            id="dropdown-item" 
-                            title={subCategory.name}>
-                            {subCategory.name}
+            <Dropdown.Item
+                          key={subCategory._id}
+                          onClick={() => {
+                          handleClick(subCategory._id);}}  
+                          id="dropdown-item" 
+                          title={subCategory.name}>
+                          {subCategory.name}
             </Dropdown.Item>
           ))}  
 

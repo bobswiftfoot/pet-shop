@@ -12,6 +12,8 @@ import {
 import { QUERY_ALL_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 import spinner from '../assets/spinner.gif';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import dogfood from '../assets/images/dogfood.jpg';
 
 function Detail() {
@@ -23,6 +25,10 @@ function Detail() {
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
 
   const { products, cart } = state;
+  
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     // already in global store
@@ -72,34 +78,30 @@ function Detail() {
     }
   };
 
-  const removeFromCart = () => {
-    dispatch({
-      type: REMOVE_FROM_CART,
-      _id: currentProduct._id,
-    });
-
-    idbPromise('cart', 'delete', { ...currentProduct });
-  };
 
   return (
     <>
       {currentProduct && cart ? (
         <div className="detail-product container my-1">
           <Link to="/products">← Back to All Products</Link>
-
           <h2>{currentProduct.name}</h2>
-
           <p>{currentProduct.description}</p>
-
           <p>
             <strong>Price: ${currentProduct.price}{' '}</strong><br />
-            <button className='addtocart-btn' onClick={addToCart}>Add to Cart</button>
-            {/* <button
-              disabled={!cart.find((p) => p._id === currentProduct._id)}
-              onClick={removeFromCart}
-            >
-              Remove from Cart
-            </button> */}
+            <button className='addtocart-btn' onClick={addToCart && handleShow} >Add to Cart</button>
+
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Success</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Your item has been added!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
           </p>
           
           <img

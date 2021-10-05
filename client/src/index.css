@@ -125,7 +125,6 @@ header a:hover {
 .nav-container {
   background-color: rgb(255, 182, 86);
   height: 150px;
-  z-index: 9999;
   position:relative;
   border-bottom: 10px solid rgb(0, 0, 0);
 }
@@ -136,6 +135,7 @@ header a:hover {
 
 .inner-nav {
   height: 65px;
+  text-align: start;
 }
 
 .nav-text  {
@@ -167,14 +167,13 @@ header a:hover {
 }
 
 .nav-items {
-  margin-top: 90px;
+  text-align: right;
 }
 
 .dropdown {
   font-family: 'Fredoka One', cursive;
   font-size: 20px;
   background: rgba(233, 17, 17, 0);
-  margin-left: 120px;
   border:0px  none;
 }
 
@@ -345,15 +344,6 @@ button[disabled] {
 .card-body {
   flex: 1 1 auto;
   padding: 1rem 1rem;
-  margin-top: -20px;
-  margin: auto;
-}
-
-.card-body:hover {
-  flex: 1 1 auto;
-  padding: 1rem 1rem;
-  margin-top: -20px;
-  transform: scale(1.05);
 }
 
 .card-title {
@@ -454,6 +444,7 @@ button[disabled] {
   border-color: black;
   border-radius: 20px;
 }
+
 
 .addtocart-btn:hover {
   color: black;
@@ -596,8 +587,41 @@ form {
   margin-bottom: 200px;
 }
 
+.navbar-expand {
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.navbar-expand button {
+  font-family: 'Fredoka One', cursive;
+  color: #060606;
+  background-color: #ffffff;
+  border-color: #000000;
+  border-radius: 1000px;
+}
+
+.navbar-expand-dropdown-item {
+  font-family: 'Fredoka One', cursive;
+  color: #060606;
+  background-color: transparent;
+  border-color: #000000;
+  border-radius: 1000px;
+}
+
+.navbar-expand button:hover {
+  color: #060606;
+  background-color: #ffffff;
+  border-color: #000000;
+  border-radius: 1000px;
+}
+
+
 .products-container-text h2 {
+  font-family: 'Fredoka One', cursive;
   color: black;
+  text-align: center;
+  margin-top: -100px;
 }
 
 .product-page-col {
@@ -619,15 +643,22 @@ form {
   color:black;
 }
 
-.profile-card-body:hover {
-  flex: 1 1 auto;
-  padding: 1rem 1rem;
-  margin-top: -20px;
+.product-card-h2:hover {
+  transform: scale(1.05);
+}
+
+/* .container-fluid Card {
   transform: none;
+} */
+
+.profile-card {
+  border: solid 2px black;
+  width: 500px;
 }
 
 .order-history-container {
   text-align: center;
+  width: 100%;
 }
 
 .reviews-container-h2{
@@ -670,6 +701,7 @@ input:focus {
   flex-wrap: wrap;
   margin-left: 60px;
   margin-top: 100px;
+  justify-content: center;
 }
 
 .space-between {
@@ -743,8 +775,8 @@ input:focus {
   color: var(--error);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 375px) {
   .card {
-    width: 100%;
+    width: 100% !important;
   }
 }
