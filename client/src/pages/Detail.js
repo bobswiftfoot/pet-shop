@@ -4,7 +4,6 @@ import { useQuery } from '@apollo/client';
 
 import { useStoreContext } from '../utils/GlobalState';
 import {
-  REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
   ADD_TO_CART,
   UPDATE_PRODUCTS,
@@ -24,7 +23,7 @@ function Detail() {
 
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
 
-  const { products, cart } = state;
+  const { products } = state;
   
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -57,7 +56,8 @@ function Detail() {
     }
   }, [products, data, loading, dispatch, id]);
 
-  const addToCart = () => {
+  const addToCart = async () => {
+    const cart = await idbPromise('cart', 'get');
     const itemInCart = cart.find((cartItem) => cartItem._id === id);
     if (itemInCart) {
       dispatch({
@@ -81,14 +81,14 @@ function Detail() {
 
   return (
     <>
-      {currentProduct && cart ? (
+      {currentProduct ? (
         <div className="detail-product container my-1">
           <Link to="/products">← Back to All Products</Link>
           <h2>{currentProduct.name}</h2>
           <p>{currentProduct.description}</p>
           <p>
             <strong>Price: ${currentProduct.price}{' '}</strong><br />
-            <button className='addtocart-btn' onClick={addToCart && handleShow} >Add to Cart</button>
+            <button className='addtocart-btn' onClick={() => { addToCart(); handleShow(); }} >Add to Cart</button>
 
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>

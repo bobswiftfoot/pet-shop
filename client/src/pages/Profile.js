@@ -23,8 +23,6 @@ function MyVerticallyCenteredModal(props) {
 
     const { loading, data } = useQuery(QUERY_ME);
 
-    const user = data?.me || data?.user || {};
-
     const handleEditSubmit = async (event) => {
         event.preventDefault();
         console.log("pre-edit");

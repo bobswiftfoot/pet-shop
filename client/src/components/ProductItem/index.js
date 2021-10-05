@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from '@apollo/client';
 import { useStoreContext } from "../../utils/GlobalState";
 import {
@@ -19,13 +19,10 @@ import dogfood from '../../assets/images/dogfood.jpg';
 
 function ProductItem(item) {
   const [state, dispatch] = useStoreContext();
-  const { id } = useParams();
   const {
-    image,
     name,
     _id,
     price,
-    quantity
   } = item;
 
 
@@ -33,7 +30,7 @@ function ProductItem(item) {
 
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
 
-  const { products, cart } = state;
+  const { products } = state;
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -43,7 +40,7 @@ function ProductItem(item) {
   useEffect(() => {
     // already in global store
     if (products.length) {
-      setCurrentProduct(products.find((product) => product._id === id));
+      setCurrentProduct(products.find((product) => product._id === _id));
     }
     // retrieved from server
     else if (data) {
@@ -65,17 +62,15 @@ function ProductItem(item) {
         });
       });
     }
-  }, [products, data, loading, dispatch, id]);
+  }, [products, data, loading, dispatch, _id]);
 
-  const addToCart = () => {
-    console.log('hello');
-    console.log(cart);
-    const itemInCart = cart.find((cartItem) => cartItem._id === id);
-    console.log(itemInCart);
+  const addToCart = async () => {
+    const cart = await idbPromise('cart', 'get');
+    const itemInCart = cart.find((cartItem) => cartItem._id === _id);
     if (itemInCart) {
       dispatch({
         type: UPDATE_CART_QUANTITY,
-        _id: id,
+        _id: _id,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
       });
       idbPromise('cart', 'put', {
@@ -92,28 +87,10 @@ function ProductItem(item) {
   };
 
   return (
-    //     <div className="card px-1 py-1">
-    //       <Link to={`/products/${_id}`}>
-    //         <img
-    //           alt={name}
-    //           src={`/images/${image}`}
-    //         />
-    //         <p>{name}</p>
-    //       </Link>
-    //       <div>
-    //         <div>{quantity} {pluralize("item", quantity)} in stock</div>
-    //         <span>${price}</span>
-    //       </div>
-    //       <button onClick={addToCart}>Add to cart</button>
-    // </div>
-
     <Row xs={1} md={1} className="prod-g-4">
-      {/* {Array.from({ length: 1 }).map((_, idx) => ( */}
       <Col className='product-page-col'>
         <br />
         <Card className='product-page-cards mt-5'>
-
-
           <Card.Body>
             <Link to={`/products/${_id}`} className='product-link'>
               <Card.Img className='product-page-img' variant="top" src={dogfood} />
@@ -126,7 +103,7 @@ function ProductItem(item) {
             </Link>
           </Card.Body>
           <br />
-          <button className='addtocart-btn mx-3 mb-3' onClick={addToCart && handleShow } >Add to Cart</button>
+          <button className='addtocart-btn mx-3 mb-3' onClick={() => { addToCart(); handleShow(); }} >Add to Cart</button>
           <br />
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>

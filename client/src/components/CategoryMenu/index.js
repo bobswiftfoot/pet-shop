@@ -1,40 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
 import {
   UPDATE_CURRENT_CATEGORY,
-  UPDATE_TOPCATEGORIES,
 } from '../../utils/actions';
 import { QUERY_TOPCATEGORIES } from '../../utils/queries';
-import { idbPromise } from '../../utils/helpers';
 import { Dropdown, DropdownButton, Navbar, Button } from 'react-bootstrap';
 
 function CategoryMenu() {
 
   const [state, dispatch] = useStoreContext();
 
-  const { topCategories } = state;
-
   const { loading, data: topCategoryData } = useQuery(QUERY_TOPCATEGORIES);
-
-  useEffect(() => {
-    if (topCategoryData) {
-      dispatch({
-        type: UPDATE_TOPCATEGORIES,
-        topCategories: topCategoryData.topCategories,
-      });
-      topCategoryData.topCategories.forEach((category) => {
-        idbPromise('topCategories', 'put', category);
-      });
-    } else if (!loading) {
-      idbPromise('topCategories', 'get').then((topCategories) => {
-        dispatch({
-          type: UPDATE_TOPCATEGORIES,
-          topCategories: topCategories,
-        });
-      });
-    }
-  }, [topCategoryData, loading, dispatch]);
 
   const handleClick = (id) => {
     dispatch({

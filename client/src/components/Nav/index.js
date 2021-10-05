@@ -1,13 +1,9 @@
 import React from "react";
 import Auth from "../../utils/auth";
 import Dropdown from 'react-bootstrap/Dropdown'
-import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
-import pawprints from '../../assets/images/pawprints.jpg';
-import lizard from '../../assets/images/lizard.jpg';
 import { RiShoppingCart2Fill } from 'react-icons/ri';
-import { GiSittingDog } from 'react-icons/gi';
 
 
 function Nav() {
