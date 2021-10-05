@@ -377,7 +377,8 @@ db.once('open', async () =>
 
     await User.deleteMany();
 
-    const users = await User.insertMany([
+    let users = [];
+    users.push(await User.create(
         {
             firstName: 'Nathan',
             lastName: 'Pfau',
@@ -390,7 +391,8 @@ db.once('open', async () =>
                 }
             ],
             admin: true
-        },
+        }));
+    users.push(await User.create(
         {
             firstName: 'Chris',
             lastName: 'Rose',
@@ -403,7 +405,8 @@ db.once('open', async () =>
                 }
             ],
             admin: true
-        },
+        }));
+    users.push(await User.create(
         {
             firstName: 'Alan',
             lastName: 'Moreno',
@@ -416,8 +419,7 @@ db.once('open', async () =>
                 }
             ],
             admin: true
-        }
-    ]);
+        }));
 
     console.log('Users seeded');
 
