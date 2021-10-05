@@ -3,10 +3,11 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from '@apollo/client';
 import { QUERY_CHECKOUT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
+import { Link } from "react-router-dom";
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
 import { useStoreContext } from '../../utils/GlobalState';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
+import { ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 
 const stripePromise = loadStripe('pk_test_51JeslkDra0kXhwYb31UWlnQwQEPytj64fEPrbVZJgiEG906Vmsz0m78Je1emVwldFGF1NTLQqiRnGlTVefKufZtn00sKAQ8tMf');
 
@@ -33,10 +34,6 @@ const Cart = () => {
     }
   }, [state.cart.length, dispatch]);
 
-  function toggleCart() {
-    dispatch({ type: TOGGLE_CART });
-  }
-
   function calculateTotal() {
     let sum = 0;
     state.cart.forEach((item) => {
@@ -59,21 +56,18 @@ const Cart = () => {
     });
   }
 
-  if (!state.cartOpen) {
-    return (
-      <div className="cart-closed" onClick={toggleCart}>
-        <span  aria-label="trash">
-          Cart
-        </span>
-      </div>
-    );
-  }
+  // if (!state.cartOpen) {
+  //   return (
+  //     <div className="cart-closed" onClick={toggleCart}>
+  //       <span  aria-label="trash">
+  //         Cart
+  //       </span>
+  //     </div>
+  //   );
+  //}
 
   return (
     <div className="cart">
-      <div className="close" onClick={toggleCart}>
-        [close]
-      </div>
       <h2>Shopping Cart</h2>
       {state.cart.length ? (
         <div>
@@ -87,16 +81,15 @@ const Cart = () => {
             {Auth.loggedIn() ? (
               <button onClick={submitCheckout}>Checkout</button>
             ) : (
-              <span>(log in to check out)</span>
+              <Link to='/login'>
+              <span>Log in to check out</span>
+              </Link >
             )}
           </div>
         </div>
       ) : (
         <h3>
-          <span role="img" aria-label="shocked">
-            😱
-          </span>
-          You haven't added anything to your cart yet!
+          Your cart is empty!
         </h3>
       )}
     </div>

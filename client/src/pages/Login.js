@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { LOGIN } from '../utils/mutations';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -8,16 +8,22 @@ import Auth from '../utils/auth';
 
 function Login(props) {
     const [formState, setFormState] = useState({ email: '', password: '' });
-    const [login, { error }] = useMutation(LOGIN);
+    const [login] = useMutation(LOGIN);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
+            console.log("pre-log");
+
             const mutationResponse = await login({
                 variables: { email: formState.email, password: formState.password },
             });
+            console.log("post-log");
+
+            console.log(mutationResponse.data.login.user);
             const token = mutationResponse.data.login.token;
             Auth.login(token);
+            window.location.assign('/');
         } catch (e) {
             console.log(e);
         }
@@ -34,8 +40,8 @@ function Login(props) {
 
         <>
 
-            <Form>
-                <Form.Group onSubmit={handleFormSubmit} className="mb-3" controlId="formBasicEmail">
+            <Form onSubmit={handleFormSubmit}>
+                <Form.Group className="mb-3">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control placeholder="example123@email.com"
                         name="email"
@@ -56,14 +62,12 @@ function Login(props) {
                         onChange={handleChange} />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button className='login-btn' variant="primary" type="submit">
                     Login
                 </Button>
             </Form>
 
         </>
-
-
     );
 }
 

@@ -14,6 +14,38 @@ export const ADD_USER = gql`
   }
 `;
 
+export const EDIT_USER = gql`
+  mutation editUser($editUserId: ID!, $editUserFirstName: String, $editUserLastName: String, $editUserUserName: String, $editUserEmail: String, $editUserPassword: String) 
+  {
+    editUser(_id: $editUserId, firstName: $editUserFirstName, lastName: $editUserLastName, userName: $editUserUserName, email: $editUserEmail, password: $editUserPassword) 
+    {
+      token
+      user
+      {
+        _id
+        firstName
+        lastName
+        userName
+        email
+        }
+      }
+    }
+    `;
+
+export const REMOVE_USER = gql`
+  mutation removeUser($removeUserId: ID!) 
+  {
+    removeUser(_id: $removeUserId) 
+    {
+      _id
+      firstName
+      lastName
+      userName
+      email
+    }
+  }
+`;
+
 export const ADD_CATEGORY = gql`
   mutation addCategory($addCategoryName: String!, $addCategorySubcategories: [ID]) 
   {
@@ -82,13 +114,14 @@ export const ADD_PRODUCT = gql`
 `;
 
 export const EDIT_PRODUCT = gql`
-  mutation editProduct($editProductId: ID!, $editProductName: String, $editProductDescription: String, $editProductPrice: Float, $editProductCategory: ID, $editProductFeaturedProduct: Boolean, $editProductRating: Float) 
+  mutation editProduct($editProductId: ID!, $editProductName: String, $editProductDescription: String, $editProductImage: String, $editProductPrice: Float, $editProductCategory: ID, $editProductFeaturedProduct: Boolean) 
   {
-    editProduct(_id: $editProductId, name: $editProductName, description: $editProductDescription, price: $editProductPrice, category: $editProductCategory, featuredProduct: $editProductFeaturedProduct, rating: $editProductRating) 
+    editProduct(_id: $editProductId, name: $editProductName, description: $editProductDescription, image: $editProductImage, price: $editProductPrice, category: $editProductCategory, featuredProduct: $editProductFeaturedProduct) 
     {
       _id
       name
       description
+      image
       price
       category 
       {

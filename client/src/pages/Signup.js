@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import Form from 'react-bootstrap/Form';
@@ -12,16 +11,25 @@ function Signup(props) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log("pre-reg");
+
     const mutationResponse = await addUser({
       variables: {
-        email: formState.email,
-        password: formState.password,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
+        addUserEmail: formState.email,
+        addUserPassword: formState.password,
+        addUserFirstName: formState.firstName,
+        addUserLastName: formState.lastName,
+        addUserUserName: formState.userName
       },
     });
+
+    console.log("post-reg");
+
+    console.log(mutationResponse.data.addUser.user);
+    console.log(mutationResponse.data.addUser.token);
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
+    window.location.assign('/');
   };
 
   const handleChange = (event) => {
@@ -52,6 +60,15 @@ function Signup(props) {
             onChange={handleChange} />
   </Form.Group>
 
+  <Form.Group className="mb-3" controlId="formBasicPassword">
+    <Form.Label>Username</Form.Label>
+    <Form.Control placeholder="User"
+            name="userName"
+            type="userName"
+            id="userName"
+            onChange={handleChange} />
+  </Form.Group>
+
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
     <Form.Control placeholder="example123@email.com"
@@ -73,7 +90,7 @@ function Signup(props) {
             onChange={handleChange} />
   </Form.Group>
 
-  <Button variant="primary" type="submit">
+  <Button className='addtocart-btn' variant="primary" type="submit">
     Register
   </Button>
 </Form>

@@ -1,11 +1,24 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Category, Product, Review, Order } = require('../models');
+const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_51JeslkDra0kXhwYb8LB1x0i2Q6W9AF0xAeVXBqLqZouUzw3WUkwPfG94ISNW5BZnXOEtM3dYYvLh9AAytaTExThX00bV1s0ZFL');
 
 const resolvers =
 {
     Query:
     {
+        me: async (parent, args, context) => {
+            console.log("me");
+            if (context.user) {
+                const userData = await User.findOne({ _id: context.user._id })
+                    .select('-__v -password')
+                    .populate({ path: "reviews", populate: "product" })
+                    .populate({ path: "orders", populate: "product" })
+                return userData;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
         users: async () => {
             return await User.find().populate({ path: "reviews", populate: "product" });
         },
@@ -15,14 +28,33 @@ const resolvers =
         categories: async () => {
             return await Category.find().populate("subcategories");
         },
-        subcategories: async (parent, { _id }) => {
-            return await Category.findById(_id);
+        topCategories: async (parent, { _id }) => 
+        {
+            const categories =  await Category.find().populate("subcategories");
+            const topCategories = [];
+            for(let i = 0; i < categories.length; i++)
+            {
+                if(categories[i].subcategories.length > 0)
+                    topCategories.push(categories[i]);
+            }
+            return topCategories;
+        },
+        subcategories: async (parent, { _id }) => 
+        {
+            const parentCategory = await Category.findById(_id).populate("subcategories");
+            const subcategories = [];
+            for(let i = 0; i < parentCategory.subcategories.length; i++)
+            {
+                const category = await Category.findById(parentCategory.subcategories[i]._id);
+                subcategories.push(category);
+            }
+            return subcategories;
         },
         products: async (parent, { category }) => {
             const params = {};
             if (category)
                 params.category = category;
-            return await Product.find(params).populate("category");
+            return await Product.find(params).populate("category").populate("reviews");
         },
         product: async (parent, { _id }) => {
             return await Product.findById(_id).populate("category").populate({ path: "reviews", populate: "user" });
@@ -102,6 +134,42 @@ const resolvers =
             const user = await User.create(args);
             return user;
         },
+        removeUser: async (parent, {_id}) => {
+            const user = await User.findOneAndDelete({ _id: _id}, {new: true})
+                .populate("reviews");
+            
+            //Go through all reviews and remove what we're deleting
+            for(let i = 0; i < user.reviews.length; i++)
+            {
+                const review = await Review.findOneAndRemove(user.reviews[0]._id);
+
+                await Product.findOneAndUpdate(
+                    { _id: review.product },
+                    { $pull: { reviews: user.reviews[0]._id } });
+            }
+            return user;
+        },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const token = signToken(user);
+            return { token, user };
+        },
+        editUser: async (parent, args) => {
+            const user = await User.findOneAndUpdate({_id: args._id}, { firstName: args.firstName, lastName: args.lastName, userName: args.userName, email: args.email, password: args.password});
+            const token = signToken(user);
+            return { token, user };
+        },
         addCategory: async (parent, args) => {
             const category = await Category.create(args);
             return category;
@@ -119,11 +187,39 @@ const resolvers =
             throw new AuthenticationError('Not logged in');
         },
         editCategory: async (parent, args) => {
-            const category = await Category.findOneAndUpdate(args._id, args);
+            const category = await Category.findOneAndUpdate({_id: args._id}, { name: args.name, subcategories: args.subcategories});
             return category;
         },
         removeCategory: async (parent, { _id }) => {
-            const category = await Category.findOneAndDelete(_id);
+            const category = await Category.findOneAndDelete({ _id: _id});
+            
+            //Go through all subcategories and remove what we're deleting
+            const categories =  await Category.find().populate("subcategories");
+            for(let i = 0; i < categories.length; i++)
+            {
+                if(categories[i].subcategories.length > 0)
+                {
+                    let subcategories = [];
+                    categories[i].subcategories.forEach(subcategory =>
+                    {
+                        if(subcategory._id !== _id)
+                            subcategories.push(subcategory._id)
+                    });
+                    await Category.findOneAndUpdate({_id: categories[i]._id}, { subcategories: subcategories});
+                }
+            }
+
+            //Go through all products and set the removed category to a new id
+            const products =  await Product.find().populate("category");
+            for(let p = 0; p < products.length; p++)
+            {
+                if(products[p].category === _id || products[p].category === null)
+                {
+                    console.log("Changing " + products[p].name)
+                    await Product.findOneAndUpdate({ _id: products[p]._id }, {category: categories[0]._id});
+                }
+            }
+
             return category;
         },
         addProduct: async (parent, args) => {
@@ -131,11 +227,24 @@ const resolvers =
             return product;
         },
         editProduct: async (parent, args) => {
-            const product = await Product.findOneAndUpdate(args._id, args);
+            console.log(args);
+            const product = await Product.findOneAndUpdate({_id: args._id}, { name: args.name, description: args.description, image: args.image, price: args.price, category: args.category, featuredProduct: args.featuredProduct});
+            console.log(product);
             return product;
         },
-        removeProduct: async (parent, { _id }) => {
-            const product = await Product.findOneAndDelete(_id);
+        removeProduct: async (parent, {_id}) => {
+            const product = await Product.findOneAndDelete({ _id: _id}, {new: true})
+                .populate("reviews");
+            
+            //Go through all reviews and remove what we're deleting
+            for(let i = 0; i < product.reviews.length; i++)
+            {
+                const review = await Review.findOneAndRemove(product.reviews[0]._id);
+
+                await User.findOneAndUpdate(
+                    { _id: review.user },
+                    { $pull: { reviews: product.reviews[0]._id } });
+            }
             return product;
         },
         addReview: async (parent, args) => {

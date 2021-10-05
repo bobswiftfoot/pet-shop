@@ -5,7 +5,6 @@ import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
-import spinner from '../../assets/spinner.gif';
 
 function ProductList() {
   const [state, dispatch] = useStoreContext();
@@ -13,7 +12,6 @@ function ProductList() {
   const { currentCategory } = state;
 
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
-
   useEffect(() => {
     if (data) {
       dispatch({
@@ -44,12 +42,11 @@ function ProductList() {
   }
 
   return (
-    <div className="my-2">
-      <h2>Our Products:</h2>
-      {state.products.length ? (
+    <div className="my-2 products-container-text">
+      <h2>Our Products</h2>
         <div className="flex-row">
           {filterProducts().map((product) => (
-            <ProductItem
+            <ProductItem  
               key={product._id}
               _id={product._id}
               image={product.image}
@@ -59,12 +56,9 @@ function ProductList() {
             />
           ))}
         </div>
-      ) : (
-        <h3>You haven't added any products yet!</h3>
-      )}
-      {loading ? <img src={spinner} alt="loading" /> : null}
     </div>
   );
 }
+
 
 export default ProductList;

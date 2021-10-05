@@ -3,20 +3,24 @@ import { gql } from '@apollo/client';
 export const QUERY_ALL_USERS = gql`
     query users 
     {
-        _id
-        firstName
-        lastName
-        userName
-        email
-        reviews 
+        users
         {
             _id
-            reviewText
-            rating
-            product 
+            firstName
+            lastName
+            userName
+            email
+            reviews 
             {
-                name
+                _id
+                reviewText
+                rating
+                product 
+                {
+                    name
+                }
             }
+            admin
         }
     }
 `;
@@ -49,12 +53,31 @@ export const QUERY_USER = gql`
 export const QUERY_ALL_CATEGORIES = gql`
     query categories
     {
-        _id
-        name
-        subcategories 
+        categories
         {
             _id
             name
+            subcategories 
+            {
+                _id
+                name
+            }
+        }
+    }
+`;
+
+export const QUERY_TOPCATEGORIES = gql`
+    query topCategories 
+    {
+        topCategories 
+        {
+            _id
+            name
+            subcategories 
+            {
+                _id
+                name
+            }
         }
     }
 `;
@@ -73,22 +96,26 @@ export const QUERY_SUBCATEGORIES = gql`
 export const QUERY_ALL_PRODUCTS = gql`
     query products 
     {
-        _id
-        name
-        description
-        price
-        category 
+        products
         {
+            _id
             name
-        }
-        rating
-        featuredProduct
-        reviews 
-        {
-            reviewText
-            user 
+            description
+            price
+            category 
             {
-                userName
+                _id
+                name
+            }
+            featuredProduct
+            reviews 
+            {
+                reviewText
+                rating
+                user 
+                {
+                    userName
+                }
             }
         }
     }
@@ -107,11 +134,11 @@ export const QUERY_ALL_PRODUCTS_BY_CATEGORY = gql`
             {
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName
@@ -134,11 +161,11 @@ export const QUERY_PRODUCT = gql`
             {
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName
@@ -161,11 +188,11 @@ export const QUERY_FEATURED_PRODUCTS = gql`
             {
                 name
             }
-            rating
             featuredProduct
             reviews 
             {
                 reviewText
+                rating
                 user 
                 {
                     userName
@@ -179,6 +206,26 @@ export const QUERY_REVIEWS = gql`
     query reviews($reviewsUser: ID, $reviewsProduct: ID) 
     {
         reviews(user: $reviewsUser, product: $reviewsProduct) 
+        {
+            _id
+            reviewText
+            rating
+            user 
+            {
+                userName
+            }
+            product 
+            {
+                name
+            }
+        }
+    }
+`;
+
+export const QUERY_ALL_REVIEWS = gql`
+    query reviews
+    {
+        reviews
         {
             _id
             reviewText
@@ -219,6 +266,39 @@ export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {
     checkout(products: $products) {
       session
+    }
+  }
+`;
+
+export const QUERY_ME = gql`
+  {
+    me {
+        _id
+        firstName
+        lastName
+        userName
+        email
+        orders 
+        {
+            _id
+            purchaseDate
+            products 
+            {
+                _id 
+                name
+            }
+        }
+        reviews 
+        {
+            _id
+            reviewText
+            rating
+            product 
+            {
+                name
+            }
+        }
+        admin
     }
   }
 `;

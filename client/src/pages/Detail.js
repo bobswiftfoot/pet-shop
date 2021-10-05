@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import Cart from '../components/Cart';
 import { useStoreContext } from '../utils/GlobalState';
 import {
   REMOVE_FROM_CART,
@@ -13,6 +12,7 @@ import {
 import { QUERY_ALL_PRODUCTS } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 import spinner from '../assets/spinner.gif';
+import dogfood from '../assets/images/dogfood.jpg';
 
 function Detail() {
   const [state, dispatch] = useStoreContext();
@@ -84,32 +84,32 @@ function Detail() {
   return (
     <>
       {currentProduct && cart ? (
-        <div className="container my-1">
-          <Link to="/">← Back to Products</Link>
+        <div className="detail-product container my-1">
+          <Link to="/products">← Back to All Products</Link>
 
           <h2>{currentProduct.name}</h2>
 
           <p>{currentProduct.description}</p>
 
           <p>
-            <strong>Price:</strong>${currentProduct.price}{' '}
-            <button onClick={addToCart}>Add to Cart</button>
-            <button
+            <strong>Price: ${currentProduct.price}{' '}</strong><br />
+            <button className='addtocart-btn' onClick={addToCart}>Add to Cart</button>
+            {/* <button
               disabled={!cart.find((p) => p._id === currentProduct._id)}
               onClick={removeFromCart}
             >
               Remove from Cart
-            </button>
+            </button> */}
           </p>
-
+          
           <img
-            src={`/images/${currentProduct.image}`}
+            src={dogfood}
             alt={currentProduct.name}
           />
         </div>
       ) : null}
       {loading ? <img src={spinner} alt="loading" /> : null}
-      <Cart />
+      {/* <Cart /> */}
     </>
   );
 }

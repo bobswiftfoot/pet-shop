@@ -2,37 +2,38 @@ import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';
 import {
-  UPDATE_CATEGORIES,
   UPDATE_CURRENT_CATEGORY,
+  UPDATE_TOPCATEGORIES,
 } from '../../utils/actions';
-import { QUERY_ALL_CATEGORIES } from '../../utils/queries';
+import { QUERY_TOPCATEGORIES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
+import { Dropdown, DropdownButton, Navbar, Button } from 'react-bootstrap';
 
 function CategoryMenu() {
   const [state, dispatch] = useStoreContext();
 
-  const { categories } = state;
+  const { topCategories } = state;
 
-  const { loading, data: categoryData } = useQuery(QUERY_ALL_CATEGORIES);
+  const { loading, data: topCategoryData } = useQuery(QUERY_TOPCATEGORIES);
 
   useEffect(() => {
-    if (categoryData) {
+    if (topCategoryData) {
       dispatch({
-        type: UPDATE_CATEGORIES,
-        categories: categoryData.categories,
+        type: UPDATE_TOPCATEGORIES,
+        topCategories: topCategoryData.topCategories,
       });
-      categoryData.categories.forEach((category) => {
-        idbPromise('categories', 'put', category);
+      topCategoryData.topCategories.forEach((category) => {
+        idbPromise('topCategories', 'put', category);
       });
     } else if (!loading) {
-      idbPromise('categories', 'get').then((categories) => {
+      idbPromise('topCategories', 'get').then((topCategories) => {
         dispatch({
-          type: UPDATE_CATEGORIES,
-          categories: categories,
+          type: UPDATE_TOPCATEGORIES,
+          topCategories: topCategories,
         });
       });
     }
-  }, [categoryData, loading, dispatch]);
+  }, [topCategoryData, loading, dispatch]);
 
   const handleClick = (id) => {
     dispatch({
@@ -41,20 +42,35 @@ function CategoryMenu() {
     });
   };
 
+  if (loading) {
+    return (<div>
+      Loading...
+    </div>)
+  }
+
   return (
-    <div>
-      <h2>Choose a Category:</h2>
-      {categories.map((item) => (
-        <button
-          key={item._id}
-          onClick={() => {
-            handleClick(item._id);
-          }}
-        >
-          {item.name}
-        </button>
-      ))}
-    </div>
+    <Navbar>
+      <h2> Choose a Category: </h2>
+        <Button onClick={() => { handleClick(null);}} > All </Button>
+        {topCategoryData.topCategories.map((category) => (
+        <DropdownButton key={category._id}
+                        title={category.name}
+                        className="m-1">
+          {category.subcategories.map((subCategory) => (
+            <Dropdown.Item  
+                          as='button'
+                            key={subCategory._id}
+                            onClick={() => {
+                            handleClick(subCategory._id);}}  
+                            id="dropdown-item" 
+                            title={subCategory.name}>
+                            {subCategory.name}
+            </Dropdown.Item>
+          ))}  
+
+        </DropdownButton>
+        ))}
+    </Navbar>
   );
 }
 

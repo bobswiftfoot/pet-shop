@@ -1,9 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { pluralize } from "../../utils/helpers"
+// import { pluralize } from "../../utils/helpers"
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
+import Card from 'react-bootstrap/Card';
+// import CardGroup from 'react-bootstrap/CardGroup';
+// import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import dogfood from '../../assets/images/dogfood.jpg';
 
 function ProductItem(item) {
   const [state, dispatch] = useStoreContext();
@@ -40,20 +46,39 @@ function ProductItem(item) {
   }
 
   return (
-    <div className="card px-1 py-1">
-      <Link to={`/products/${_id}`}>
-        <img
-          alt={name}
-          src={`/images/${image}`}
-        />
-        <p>{name}</p>
-      </Link>
-      <div>
-        <div>{quantity} {pluralize("item", quantity)} in stock</div>
-        <span>${price}</span>
-      </div>
-      <button onClick={addToCart}>Add to cart</button>
-    </div>
+//     <div className="card px-1 py-1">
+//       <Link to={`/products/${_id}`}>
+//         <img
+//           alt={name}
+//           src={`/images/${image}`}
+//         />
+//         <p>{name}</p>
+//       </Link>
+//       <div>
+//         <div>{quantity} {pluralize("item", quantity)} in stock</div>
+//         <span>${price}</span>
+//       </div>
+//       <button onClick={addToCart}>Add to cart</button>
+// </div>
+
+ <Row xs={1} md={1} className="prod-g-4">
+  {/* {Array.from({ length: 1 }).map((_, idx) => ( */}
+    <Col className='product-page-col'>
+      <Card className='product-page-cards'>
+
+        <Card.Img className='product-page-img'variant="top" src={dogfood} />
+        <Card.Body>
+        <Link to={`/products/${_id}`} className='product-link'>
+          <Card.Title className='product-card-h2'>{name}</Card.Title>
+          <Card.Text>
+            ${price}
+          </Card.Text>
+          </Link >
+        </Card.Body>
+      </Card>
+    </Col>
+  {/* ))} */}
+</Row> 
   );
 }
 

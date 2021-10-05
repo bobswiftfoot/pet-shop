@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7bdc290c.chunk.css",
+    "main.js": "/static/js/main.4449565d.chunk.js",
+    "main.js.map": "/static/js/main.4449565d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c7e45c5c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c7e45c5c.js.map",
+    "static/css/2.94d102f3.chunk.css": "/static/css/2.94d102f3.chunk.css",
+    "static/js/2.b12313af.chunk.js": "/static/js/2.b12313af.chunk.js",
+    "static/js/2.b12313af.chunk.js.map": "/static/js/2.b12313af.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.94d102f3.chunk.css.map": "/static/css/2.94d102f3.chunk.css.map",
+    "static/css/main.7bdc290c.chunk.css.map": "/static/css/main.7bdc290c.chunk.css.map",
+    "static/js/2.b12313af.chunk.js.LICENSE.txt": "/static/js/2.b12313af.chunk.js.LICENSE.txt",
+    "static/media/birdcage.77b09e21.jpg": "/static/media/birdcage.77b09e21.jpg",
+    "static/media/cattree.45a4762e.jpg": "/static/media/cattree.45a4762e.jpg",
+    "static/media/dogandcat.4dbb40d8.jpg": "/static/media/dogandcat.4dbb40d8.jpg",
+    "static/media/dogandowner.0b7bfc6c.jpg": "/static/media/dogandowner.0b7bfc6c.jpg",
+    "static/media/dogfood.6f1babf6.jpg": "/static/media/dogfood.6f1babf6.jpg",
+    "static/media/fishtank.4b9f45e9.jpg": "/static/media/fishtank.4b9f45e9.jpg",
+    "static/media/kennel.eeb04e19.jpg": "/static/media/kennel.eeb04e19.jpg",
+    "static/media/spinner.689d9a07.gif": "/static/media/spinner.689d9a07.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c7e45c5c.js",
+    "static/css/2.94d102f3.chunk.css",
+    "static/js/2.b12313af.chunk.js",
+    "static/css/main.7bdc290c.chunk.css",
+    "static/js/main.4449565d.chunk.js"
+  ]
+}
