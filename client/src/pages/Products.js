@@ -1,14 +1,14 @@
 import React from "react";
 import ProductList from '../components/ProductList';
 import CategoryMenu from '../components/CategoryMenu';
-import ProductItem from '../components/ProductItem';
+import { Container } from 'react-bootstrap';
 
 const Products = () => {
   return (
-    <div className="container">
+    <Container fluid>
       <CategoryMenu />
       <ProductList />
-    </div>
+    </Container>
   );
 };
 

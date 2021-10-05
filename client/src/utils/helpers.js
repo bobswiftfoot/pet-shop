@@ -60,7 +60,7 @@ export function idbPromise(storeName, method, object) {
 export function calculateRating(reviews)
 {
   const count = reviews.length;
-  if (count == 0)
+  if (count === 0)
     return 0;
 
   let sum = 0;

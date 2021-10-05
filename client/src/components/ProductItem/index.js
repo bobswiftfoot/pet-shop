@@ -62,7 +62,7 @@ function ProductItem(item) {
 // </div>
 
  <Row xs={1} md={1} className="prod-g-4">
-  {Array.from({ length: 1 }).map((_, idx) => (
+  {/* {Array.from({ length: 1 }).map((_, idx) => ( */}
     <Col className='product-page-col'>
       <Card className='product-page-cards'>
 
@@ -77,7 +77,7 @@ function ProductItem(item) {
         </Card.Body>
       </Card>
     </Col>
-  ))}
+  {/* ))} */}
 </Row> 
   );
 }

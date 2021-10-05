@@ -5,7 +5,6 @@ import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
-import spinner from '../../assets/spinner.gif';
 
 function ProductList() {
   const [state, dispatch] = useStoreContext();
@@ -13,10 +12,8 @@ function ProductList() {
   const { currentCategory } = state;
 
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
-  console.log(data)
   useEffect(() => {
     if (data) {
-      console.log(data)
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data.products,
