@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
@@ -7,7 +7,7 @@ import { QUERY_ME } from '../utils/queries';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Row';
@@ -22,6 +22,17 @@ function MyVerticallyCenteredModal(props) {
     const [editUser] = useMutation(EDIT_USER);
 
     const { loading, data } = useQuery(QUERY_ME);
+    
+    useEffect(() => {
+        if(!loading && data) {
+            setFormState({
+                email: data.me.email,
+                firstName: data.me.firstName,
+                lastName: data.me.lastName,
+                userName: data.me.userName
+            })
+        } 
+    }, [loading, data]); 
 
     const handleEditSubmit = async (event) => {
         event.preventDefault();
@@ -77,8 +88,8 @@ function MyVerticallyCenteredModal(props) {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form className='my-5'>
+                            <Form.Group className="mb-3">
                                 <Form.Label>First Name</Form.Label>
                                 <Form.Control placeholder="First Name"
                                     defaultValue={`${data.me.firstName}`}
@@ -89,7 +100,7 @@ function MyVerticallyCenteredModal(props) {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Last Name</Form.Label>
                                 <Form.Control placeholder="Last Name"
                                     defaultValue={`${data.me.lastName}`}
@@ -100,7 +111,7 @@ function MyVerticallyCenteredModal(props) {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control placeholder="Username"
                                     defaultValue={`${data.me.userName}`}
@@ -111,10 +122,10 @@ function MyVerticallyCenteredModal(props) {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control placeholder="example123@email.com"
-                                    defaultValue={`${data.me.userName}`}
+                                    defaultValue={`${data.me.email}`}
                                     name="email"
                                     type="email"
                                     id="email"
@@ -122,7 +133,7 @@ function MyVerticallyCenteredModal(props) {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control placeholder="******"
                                     name="password"
@@ -170,10 +181,10 @@ function Profile() {
                         {data.me.admin ? <Link to="/admin">Admin Panel</Link>: null}
                     </div>
                     <div className="container-fluid">
-                        <Card className="mb-3 mx-auto profile-card">
+                        <Card id="profile-card" className="mb-3 profile-card w-80">
                             <Row className="g-0">
                                 <div>
-                                    <Card.Title><h1>{`${data.me.firstName} ${data.me.lastName}`}</h1></Card.Title>
+                                    <Card.Title id="profile-card-header" className='mx-auto'><h1>{`${data.me.firstName} ${data.me.lastName}`}</h1></Card.Title>
                                     <Card.Body className='profile-card-body'>
                                         <h3 className="pb-1">Username: {`${data.me.userName}`}</h3>
                                         <h3 className="pb-1">Email: {`${data.me.email}`}</h3><br />
@@ -186,52 +197,49 @@ function Profile() {
                                 </div>
                             </Row>
                         </Card>
-                    </div>
-                    <div className ='order-history-container'>
-                        <h2>
+                    </div><br />
+                    <div>
+                        <h2 id='profile-page-headers' className="text-center mx-auto">
                             Order History for {data.me.firstName} {data.me.lastName}
                         </h2>
-                        {data.me.orders.map((order, index) => (
-                            <Container fluid key={`Order${index}`}>
-                                <Row>
-                                    <Row>
-                                        <h3>
-                                            {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
-                                        </h3>
-                                    </Row>
-                                    <Row>
-                                    {order.products.map((product, index) => (
-                                        <Col key={index} id="profile-product-col">
-                                            <Link to={`/products/${product._id}`}  id="profile-product-link">
-                                                <p>{product.name}</p>
-                                                <img className='profile-page-img' alt={product.name} src={getImage(product.image)} />
-                                                <span>${product.price}</span>
-                                            </Link>
-                                        </Col>
-                                    ))}
-                                    </Row>
-                                </Row>
-                            </Container>
-                        ))}
-                    </div>
-                    <div className ='reviews-container'>
-                        <h2 className='reviews-container-h2'>
+                        <Container className="mx-auto px-auto">
+                                {data.me.orders.map((order, index) => (
+                                    <div key={index}>
+                                    <h3 id='order-history-date' className="text-center my-3">
+                                        {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
+                                    </h3>
+                                    <div className='flex-row justify-content-around my-5 mx-auto' key={`Order${index}`}>
+                                        {order.products.map((product, index) => (
+                                                <Col className='col-md-4' key={index}>
+                                                    <Link className="mb-4 px-auto mx-auto" to={`/products/${product._id}`}>
+                                                        <p>{product.name}</p>
+                                                        <img className='profile-page-img' alt={product.name} src={getImage(product.image)} /><br />
+                                                        <span>${product.price}</span>
+                                                    </Link><br />
+                                                </Col>
+                                        ))}
+                                    </div>
+                                    </div>
+                                ))}
+                        </Container><br />
+                    </div><br />
+                    <div>
+                        <h2 id='profile-page-headers' className='text-center mx-auto'>
                             Reviews from {data.me.firstName} {data.me.lastName}
                         </h2>
-                        <Container fluid>
-                            <Row>
-                            {data.me.reviews.map((review, index) => (
-                                <Col key={index}  id="profile-product-col">
-                                    <Link to={`/products/${review.product._id}`}  id="profile-product-link">
-                                        <h3>{review.product.name}</h3>
-                                        <img className='profile-page-img' alt={review.product.name} src={getImage(review.product.image)} />
-                                        <p>{review.reviewText}</p>
-                                        <p>Rating: {review.rating}</p>
-                                    </Link>
-
-                                </Col>
-                            ))}
-                            </Row>
+                        <Container className="mx-auto px-auto">
+                            <div className='flex-row justify-content-around mx-auto my-3'>
+                                {data.me.reviews.map((review, index) => (
+                                        <Col className="col-md-4" key={index}>
+                                            <Link className="mb-4 px-auto mx-3" to={`/products/${review.product._id}`}>
+                                                <h3>{review.product.name}</h3>
+                                                <img className='profile-page-img' alt={review.product.name} src={getImage(review.product.image)} />
+                                                <p>{review.reviewText}</p>
+                                                <p>Rating: {review.rating}</p>
+                                            </Link><br />
+                                        </Col>
+                                ))}
+                            </div>
                         </Container>
                     </div>
                 </>
