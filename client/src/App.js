@@ -16,6 +16,7 @@ import Signup from './pages/Signup';
 import Admin from './pages/Admin';
 import Nav from './components/Nav';
 import Cart from './components/Cart'
+import Footer from './components/Footer';
 import { StoreProvider } from './utils/GlobalState';
 import Success from './pages/Success';
 import Products from './pages/Products'
@@ -72,6 +73,7 @@ function App() {
               <Route exact path="/cart" component={Cart} />
               <Route component={NoMatch} />
             </Switch>
+            <Footer />
           </StoreProvider>
         </div>
       </Router>
