@@ -66,7 +66,7 @@ function Nav() {
       <header className="masthead inner-nav-container nav-text">
         <div className='row inner-nav justify-content-between'>
           <div className='col-12'>
-            <h1 className='px-1'>
+            <h1 className='px-5'>
               <Link to="/">
                 <span role="img" aria-label="shopping bag"></span>
                 The Pet Outlet
