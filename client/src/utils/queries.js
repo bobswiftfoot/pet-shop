@@ -102,6 +102,7 @@ export const QUERY_ALL_PRODUCTS = gql`
             name
             description
             price
+            image
             category 
             {
                 _id
@@ -130,6 +131,7 @@ export const QUERY_ALL_PRODUCTS_BY_CATEGORY = gql`
             name
             description
             price
+            image
             category 
             {
                 name
@@ -157,6 +159,7 @@ export const QUERY_PRODUCT = gql`
             name
             description
             price
+            image
             category 
             {
                 name
@@ -184,6 +187,7 @@ export const QUERY_FEATURED_PRODUCTS = gql`
             name
             description
             price
+            image
             category 
             {
                 name
@@ -286,6 +290,8 @@ export const QUERY_ME = gql`
             {
                 _id 
                 name
+                price
+                image
             }
         }
         reviews 
@@ -295,7 +301,9 @@ export const QUERY_ME = gql`
             rating
             product 
             {
+                _id
                 name
+                image
             }
         }
         admin

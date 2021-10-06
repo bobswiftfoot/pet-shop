@@ -1,7 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Category, Product, Review, Order } = require('../models');
 const { signToken } = require('../utils/auth');
-const stripe = require('stripe')('sk_test_51JeslkDra0kXhwYb8LB1x0i2Q6W9AF0xAeVXBqLqZouUzw3WUkwPfG94ISNW5BZnXOEtM3dYYvLh9AAytaTExThX00bV1s0ZFL');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers =
 {
@@ -13,7 +13,7 @@ const resolvers =
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
                     .populate({ path: "reviews", populate: "product" })
-                    .populate({ path: "orders", populate: "product" })
+                    .populate({ path: "orders", populate: "products" })
                 return userData;
             }
 
@@ -91,9 +91,15 @@ const resolvers =
         checkout: async (parent, args, context) => {
 
             const url = new URL(context.headers.referer).origin;
+            console.log(url);
+
+            console.log(args.products);
 
             const order = new Order({ products: args.products });
-            const { products } = await order.populate('products').execPopulate();
+            console.log(order);
+
+            const { products } = await order.populate('products');
+            console.log(products);
 
             const line_items = [];
 
@@ -120,8 +126,8 @@ const resolvers =
                 payment_method_types: ['card'],
                 line_items,
                 mode: 'payment',
-                success_url: '${url}/success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url: '${url}/'
+                success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+                cancel_url: `${url}/`
             });
 
             return { session: session.id };
@@ -132,7 +138,8 @@ const resolvers =
     {
         addUser: async (parent, args) => {
             const user = await User.create(args);
-            return user;
+            const token = signToken(user);
+            return { token, user };
         },
         removeUser: async (parent, {_id}) => {
             const user = await User.findOneAndDelete({ _id: _id}, {new: true})
@@ -281,3 +288,4 @@ const resolvers =
 };
 
 module.exports = resolvers;
+

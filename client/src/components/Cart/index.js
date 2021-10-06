@@ -9,7 +9,7 @@ import Auth from '../../utils/auth';
 import { useStoreContext } from '../../utils/GlobalState';
 import { ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 
-const stripePromise = loadStripe('pk_test_51JeslkDra0kXhwYb31UWlnQwQEPytj64fEPrbVZJgiEG906Vmsz0m78Je1emVwldFGF1NTLQqiRnGlTVefKufZtn00sKAQ8tMf');
+const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
   const [state, dispatch] = useStoreContext();
@@ -55,16 +55,6 @@ const Cart = () => {
       variables: { products: productIds },
     });
   }
-
-  // if (!state.cartOpen) {
-  //   return (
-  //     <div className="cart-closed" onClick={toggleCart}>
-  //       <span  aria-label="trash">
-  //         Cart
-  //       </span>
-  //     </div>
-  //   );
-  //}
 
   return (
     <div className="cart">

@@ -5,11 +5,15 @@ export const ADD_USER = gql`
   {
     addUser(firstName: $addUserFirstName, lastName: $addUserLastName, userName: $addUserUserName, email: $addUserEmail, password: $addUserPassword)
     {
-      _id
-      firstName
-      lastName
-      userName
-      email
+      token
+      user
+      {
+        _id
+        firstName
+        lastName
+        userName
+        email
+      }
     }
   }
 `;
@@ -226,7 +230,6 @@ export const ADD_ORDER = gql`
         name
         description
         price
-        quantity
         category {
           name
         }
