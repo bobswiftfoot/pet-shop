@@ -19,6 +19,7 @@ import fishtank from '../assets/images/fishtank.jpg';
 import fishtoy from '../assets/images/fishtoy.jpg';
 import fishtreats from '../assets/images/fishtreats.jpg';
 import giraffeenclosure from '../assets/images/giraffeenclosure.jpg';
+import hampsterball from '../assets/images/hampsterball.jpg';
 import hampsterwheel from '../assets/images/hampsterwheel.jpg';
 import kangaroofood from '../assets/images/kangaroofood.jpg';
 import reptilefood from '../assets/images/reptilefood.jpg';
@@ -51,6 +52,7 @@ const images =
         fishtoy: fishtoy,
         fishtreats: fishtreats,
         giraffeenclosure: giraffeenclosure,
+        hampsterball: hampsterball,
         hampsterwheel: hampsterwheel,
         kangaroofood: kangaroofood,
         reptilefood: reptilefood,
