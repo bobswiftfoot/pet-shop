@@ -26,6 +26,7 @@ body {
   line-height: 1.5;
   font-size: 16px;
   color: var(--dark);
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(245, 245, 245))
 }
 
 h1,
@@ -124,7 +125,7 @@ header a:hover {
 }
 
 .nav-container {
-  background-image: linear-gradient(to bottom right, rgb(248, 248, 248), rgb(43, 140, 250));
+  background-image: linear-gradient(to bottom right, rgb(248, 248, 248), rgb(0, 117, 252));
   height: 150px;
   position:relative;
   border-bottom: 10px solid rgb(0, 0, 0);
@@ -163,12 +164,18 @@ header a:hover {
   border-radius: 1000px;
 }
 
+.pawprint {
+  height: 100px;
+  width: 100px;
+}
+
 .right-col {
   justify-content: right;
 }
 
 .nav-items {
   text-align: right;
+  margin-top: -20px;
 }
 
 .dropdown {
@@ -363,10 +370,10 @@ button[disabled] {
 }
 
 .carousel {
-  height: 850px;
+  height: 745px;
   width: 100%;
   margin: auto;
-  background-color: rgb(255, 255, 255);
+  background-color: transparent;
   border-radius: 5px;
   opacity: 1;
 }
@@ -508,7 +515,7 @@ button[disabled] {
 
 .about-text {
   position: absolute;
-  top: 70%;
+  top: 79%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 20px;

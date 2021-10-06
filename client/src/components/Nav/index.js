@@ -2,9 +2,10 @@ import React from "react";
 import Auth from "../../utils/auth";
 import Dropdown from 'react-bootstrap/Dropdown'
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image'
 import { Link } from "react-router-dom";
 import { RiShoppingCart2Fill } from 'react-icons/ri';
-
+import pawprint from '../../assets/images/dogpaw.jpg';
 
 function Nav() {
 
@@ -71,7 +72,7 @@ function Nav() {
                 <span role="img" aria-label="shopping bag"></span>
                 The Pet Outlet
               </Link>
-
+              <Image className='pawprint' src={pawprint}/>
             </h1>
           </div>
           <div className='col-12'>
