@@ -679,6 +679,7 @@ form {
 #profile-card {
   color: black;
   font-family: 'Rubik', sans-serif;
+  width: 80%;
 }
 
 #profile-card-header {
@@ -686,6 +687,10 @@ form {
   border-color: rgb(0, 0, 0, 0.2);
   width: 75%;
 }
+
+/* #edit-profile-card {
+  width: 50%;
+} */
 
 #profile-page-headers {
   border-bottom: solid;

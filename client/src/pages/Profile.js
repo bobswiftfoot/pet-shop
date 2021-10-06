@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
@@ -22,6 +22,17 @@ function MyVerticallyCenteredModal(props) {
     const [editUser] = useMutation(EDIT_USER);
 
     const { loading, data } = useQuery(QUERY_ME);
+    
+    useEffect(() => {
+        if(!loading && data) {
+            setFormState({
+                email: data.me.email,
+                firstName: data.me.firstName,
+                lastName: data.me.lastName,
+                userName: data.me.userName
+            })
+        } 
+    }, [loading, data]); 
 
     const handleEditSubmit = async (event) => {
         event.preventDefault();
@@ -77,8 +88,8 @@ function MyVerticallyCenteredModal(props) {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form className='my-5'>
+                            <Form.Group className="mb-3">
                                 <Form.Label>First Name</Form.Label>
                                 <Form.Control placeholder="First Name"
                                     defaultValue={`${data.me.firstName}`}
@@ -89,7 +100,7 @@ function MyVerticallyCenteredModal(props) {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Last Name</Form.Label>
                                 <Form.Control placeholder="Last Name"
                                     defaultValue={`${data.me.lastName}`}
@@ -100,7 +111,7 @@ function MyVerticallyCenteredModal(props) {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control placeholder="Username"
                                     defaultValue={`${data.me.userName}`}
@@ -111,10 +122,10 @@ function MyVerticallyCenteredModal(props) {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control placeholder="example123@email.com"
-                                    defaultValue={`${data.me.userName}`}
+                                    defaultValue={`${data.me.email}`}
                                     name="email"
                                     type="email"
                                     id="email"
@@ -122,7 +133,7 @@ function MyVerticallyCenteredModal(props) {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control placeholder="******"
                                     name="password"
@@ -170,7 +181,7 @@ function Profile() {
                         {data.me.admin ? <Link to="/admin">Admin Panel</Link>: null}
                     </div>
                     <div className="container-fluid">
-                        <Card id="profile-card" className="mb-3 profile-card w-90">
+                        <Card id="profile-card" className="mb-3 profile-card w-80">
                             <Row className="g-0">
                                 <div>
                                     <Card.Title id="profile-card-header" className='mx-auto'><h1>{`${data.me.firstName} ${data.me.lastName}`}</h1></Card.Title>
@@ -193,7 +204,7 @@ function Profile() {
                         </h2>
                         <Container className="mx-auto px-auto">
                                 {data.me.orders.map((order, index) => (
-                                    <>
+                                    <div key={index}>
                                     <h3 id='order-history-date' className="text-center my-3">
                                         {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
                                     </h3>
@@ -208,7 +219,7 @@ function Profile() {
                                                 </Col>
                                         ))}
                                     </div>
-                                    </>
+                                    </div>
                                 ))}
                         </Container><br />
                     </div><br />
@@ -219,7 +230,6 @@ function Profile() {
                         <Container className="mx-auto px-auto">
                             <div className='flex-row justify-content-around mx-auto my-3'>
                                 {data.me.reviews.map((review, index) => (
-                                    <>
                                         <Col className="col-md-4" key={index}>
                                             <Link className="mb-4 px-auto mx-3" to={`/products/${review.product._id}`}>
                                                 <h3>{review.product.name}</h3>
@@ -228,7 +238,6 @@ function Profile() {
                                                 <p>Rating: {review.rating}</p>
                                             </Link><br />
                                         </Col>
-                                    </>
                                 ))}
                             </div>
                         </Container>
