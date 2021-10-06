@@ -49,11 +49,11 @@ function HomeCard() {
   return (
     <div className='container'>
       <div className='row align-items-start'>
-        <div class="col-3 left-column">
+        <div class="col-md-3 left-column">
           <Image className='fish' src={fish} roundedCircle />
           <Image className='chameleon' src={chameleon} thumbnail />
         </div>
-        <div class="col-6 middle-column">
+        <div class="col-md-6 middle-column">
           <Carousel className="carousel">
             {filterProducts().map((product) => (
               <Carousel.Item className="carousel-item" key={product._id} interval={4000000}>
@@ -73,7 +73,7 @@ function HomeCard() {
 
           </Carousel>
         </div>
-        <div class="col-3 right-column">
+        <div class="col-md-3 right-column">
           <Image className='cat' src={cat} thumbnail />
           <Image className='parrot' src={parrot} roundedCircle />
         </div>

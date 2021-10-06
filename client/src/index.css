@@ -450,6 +450,7 @@ button[disabled] {
 }
 
 .addtocart-btn,
+.checkout-btn
 .register-btn,
 .login-btn {
   color: black;
@@ -498,32 +499,28 @@ button[disabled] {
 
 .about-img {
   width: 75%;
-  opacity: .7;
-  border-radius: 1000px;
+  opacity: 1;
+  border-radius: 100px;
   border: 2px solid rgb(0, 0, 0);
   margin: auto;
   margin-top: 30px;
 }
 
-.about-head {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 70px;
+.about-text {
+  position: inherit;
+  font-size: 20px;
+  color: black;
+  -webkit-text-stroke: .5px rgb(0, 0, 0);
+  line-height: 50px;
 }
 
-.about-text {
-  position: absolute;
-  top: 79%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
+.about-middle-column {
+  text-align: center;
 }
 
 .footer-card{
-  background-color: white;
-  color: black;
+  background-color: rgb(0, 63, 100);
+  color: rgb(255, 255, 255);
   height: 60px;
 }
 
