@@ -31,6 +31,7 @@ I can login and purchase items, write reviews on items, and access my purchases 
 * React
 * Bootstrap
 * Graphql
+* Stripe
 * Heroku
 
 ## Contribution 
