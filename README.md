@@ -13,10 +13,7 @@ SO THAT I can sell accessory products for pet owners
 
 ![Screen Shot](https://user-images.githubusercontent.com/82801290/136140121-5bf1e59b-cb0a-454a-9b19-a93ed1a3cce3.png)
 
-
 [Shop away!](https://codefellas-pet-shop.herokuapp.com/)
-
-IMAGE OF APP
 
 GIVEN an e-commerce website deployed through Heroku
 I can sign up, login, or as a guest
